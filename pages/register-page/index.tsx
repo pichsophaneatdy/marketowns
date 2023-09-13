@@ -34,7 +34,7 @@ const RegisterPage = () => {
     const handleClick = () => setShow1(!show1);
     const handleClick2 = () => setShow2(!show2);
     
-    // Handle Submitting
+    // Handle Registering New User
     const handleSubmit = async(e: React.FormEvent) => {
         e.preventDefault();
 
@@ -48,12 +48,19 @@ const RegisterPage = () => {
             setFormError("Your password does not match the confirm password.");
             return;
         }
-        setIsLoading(true);
-        const data: any = await registerUser(username, email, pwd);
-        setUsernameAWS(data);
-        setIsLoading(false);
+        try {
+            setIsLoading(true);
+            const data: any = await registerUser(username, email, pwd);
+            setUsernameAWS(data);
+            setIsLoading(false);
+        } catch(error) {
+            setFormError("Unable to create your account at the momment");
+            setIsLoading(false);
+        }
+        
     }
-    // Handle Verify
+
+    // Handle Verify Unregistered User with Verification Code
     const handleVerify =  async(e: React.FormEvent) => {
         e.preventDefault();
         try {
@@ -63,7 +70,7 @@ const RegisterPage = () => {
             setVerificationError("Your verification code is invalid or expired.")
         }
     }
-    
+
     // Clear errors when user starts typing
     useEffect(() => {
         setFormError("");
