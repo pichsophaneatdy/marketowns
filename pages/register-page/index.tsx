@@ -12,6 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { EmailIcon } from "@chakra-ui/icons";
 import styles from "./register-page.module.scss";
+// AWS sign up function
+import { registerUser } from "@/hooks/useRegister";
 
 const RegisterPage = () => {
     const [username, setUsername] = useState<string>("");
