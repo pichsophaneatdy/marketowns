@@ -20,16 +20,22 @@ const RegisterPage = () => {
     const [confirmPwd, setConfirmPwd] = useState<string>("");
     const [show1, setShow1] = useState<boolean>(false);
     const [show2, setShow2] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const handleClick = () => setShow1(!show1);
     const handleClick2 = () => setShow2(!show2);
     
     // Handle Submitting
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        setIsLoading(true);
         console.log(username)
         console.log(email)
         console.log(pwd)
         console.log(confirmPwd)
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 1500)
     }
     return (
         <section className={styles.register}>
@@ -91,9 +97,21 @@ const RegisterPage = () => {
                             </InputRightElement>
                         </InputGroup>
                     </FormControl>
-                    <Button onClick={handleSubmit} mt="5" colorScheme='teal' size='sm'>
-                        Register
-                    </Button>
+                    {
+                        isLoading ? (
+                            <Button
+                                isLoading
+                                loadingText='Loading'
+                                colorScheme='teal'
+                                variant='outline'
+                                spinnerPlacement='end'
+                            ></Button>
+                        ): (
+                            <Button onClick={handleSubmit} mt="5" colorScheme='teal' size='sm'>
+                                Register
+                            </Button>
+                        )
+                    }
                 </Stack>
             </form>
         </section>
