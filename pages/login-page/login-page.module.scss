@@ -1,6 +1,6 @@
 @use "../../styles/_mixins" as *;
 
-.register {
+.login {
     @include form-container;
     &__form {
         @include form;

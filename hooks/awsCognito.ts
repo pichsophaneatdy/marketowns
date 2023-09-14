@@ -3,13 +3,15 @@ import {
 	CognitoUserAttribute,
 	CognitoUser,
     ICognitoUserPoolData,
+    AuthenticationDetails,
 } from 'amazon-cognito-identity-js';
+import * as AWS from 'aws-sdk/global';
 
 const poolData: ICognitoUserPoolData = {
     UserPoolId: process.env.NEXT_PUBLIC_AWS_COGNITO_POOL_ID!,
     ClientId: process.env.NEXT_PUBLIC_AWS_COGNITO_CLIENT_ID!
 }
-const userPool = new CognitoUserPool(poolData);
+export const userPool = new CognitoUserPool(poolData);
 
 export const registerUser = async (username: string, email: string, password:string) => {
 
@@ -49,5 +51,47 @@ export const verifyUser = async(username: string, code: string) => {
             }
             resolve(result);
         });
+    })
+}
+
+export const loginUser = async(username: string, password: string) => {
+    return new Promise((resolve, reject) => {
+        const authenticationData = {
+            Username: username,
+            Password: password
+        }
+        const authenticationDetails = new AuthenticationDetails(
+            authenticationData
+        )
+        const userData = {
+            Username: username,
+            Pool: userPool
+        }
+        const cognitoUser = new CognitoUser(userData);
+        cognitoUser.authenticateUser(authenticationDetails, {
+            onSuccess: function(result) {
+                console.log(result)
+            },
+            onFailure: function(err) {
+                console.log(err)
+                alert(err.message || JSON.stringify(err));
+            }, 
+        })
+    })
+}
+
+export const getCurrentUser = async() => {
+    return new Promise((resolve, reject) => {
+        const cognitorUser = userPool.getCurrentUser();
+        if(cognitorUser != null) {
+            cognitorUser.getSession(function(err:any, session:any) {
+                if(err) {
+                    reject(err);
+                }
+                resolve({username: cognitorUser?.getUsername()});
+            })
+        } else {
+            reject(new Error("Not Authenticated"));
+        }
     })
 }

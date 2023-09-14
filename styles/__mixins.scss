@@ -13,3 +13,20 @@
         @content;
     }
 }
+@mixin form-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+@mixin form {
+    width: 100%;
+        max-width: 400px;
+}
+@mixin form-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}

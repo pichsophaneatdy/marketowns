@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import {
     FormControl,
     FormLabel,
-    FormErrorMessage,
-    FormHelperText,
     Input,
     InputGroup,
     InputRightElement,
@@ -11,12 +9,14 @@ import {
     Button,
     Text
 } from "@chakra-ui/react";
-import { EmailIcon } from "@chakra-ui/icons";
 import styles from "./register-page.module.scss";
+import { useRouter } from "next/router";
 // AWS functions
-import { registerUser, verifyUser } from "@/hooks/useRegister";
+import { registerUser, verifyUser } from "@/hooks/awsCognito";
 
 const RegisterPage = () => {
+    const router = useRouter();
+
     // State
     const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
@@ -25,6 +25,7 @@ const RegisterPage = () => {
     const [show1, setShow1] = useState<boolean>(false);
     const [show2, setShow2] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading2, setIsLoading2] = useState<boolean>(false);
     const [usernameAWS, setUsernameAWS] = useState<string>("");
     const [code, setCode] = useState<string>("");
 
@@ -64,10 +65,13 @@ const RegisterPage = () => {
     const handleVerify =  async(e: React.FormEvent) => {
         e.preventDefault();
         try {
+            setIsLoading2(true);
             const result = await verifyUser(usernameAWS, code);
-            console.log(result);
+            if(result === 'SUCCESS') router.push("/login-page");
+            setIsLoading2(false);
         } catch(error) {
             setVerificationError("Your verification code is invalid or expired.")
+            setIsLoading2(false);
         }
     }
 
@@ -177,10 +181,23 @@ const RegisterPage = () => {
                             />
                             </FormControl>
                             {verificationError && <Text mt="5" fontSize="sm" color="red">{verificationError}</Text>}
-                            <Button w="100%" onClick={handleVerify} mt="5" colorScheme='teal' size='sm'>
-                                Verify
-                            </Button>
-                            
+                            {
+                                isLoading2 ? (
+                                    <Button
+                                        isLoading
+                                        loadingText='Loading'
+                                        colorScheme='teal'
+                                        variant='outline'
+                                        spinnerPlacement='end'
+                                        w="100%"
+                                        mt="5"
+                                    ></Button>
+                                ): (
+                                    <Button w="100%" onClick={handleVerify} mt="5" colorScheme='teal' size='sm'>
+                                        Verify
+                                    </Button>
+                                )
+                            }
                         </form>
                     </>
                 )
