@@ -11,8 +11,11 @@ import {
     Text
 } from "@chakra-ui/react";
 import { loginUser } from '@/hooks/awsCognito';
+import { useRouter } from 'next/router';
 
 const LoginPage = () => {
+
+    const router = useRouter();
 
     const [username, setUsername] = useState<string>("");
     const [pwd, setPwd] = useState<string>("");
@@ -25,7 +28,8 @@ const LoginPage = () => {
         e.preventDefault();
         try {
             const data = await loginUser(username, pwd);
-            console.log(data)
+            console.log("success")
+            router.push("/dashboard");
         } catch(error) {
             console.log(error)
         }

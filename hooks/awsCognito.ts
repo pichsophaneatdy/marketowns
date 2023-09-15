@@ -70,11 +70,10 @@ export const loginUser = async(username: string, password: string) => {
         const cognitoUser = new CognitoUser(userData);
         cognitoUser.authenticateUser(authenticationDetails, {
             onSuccess: function(result) {
-                console.log(result)
+                resolve(result);
             },
             onFailure: function(err) {
-                console.log(err)
-                alert(err.message || JSON.stringify(err));
+                reject(err);
             }, 
         })
     })
