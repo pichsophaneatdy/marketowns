@@ -17,7 +17,7 @@ import {
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon} from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
 // AWS Sign out function
-import { logout } from '@/hooks/awsCognito';
+import { logout } from '@/aws/awsCognito';
 
 export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure()
@@ -31,7 +31,7 @@ export default function WithSubnavigation() {
             color={useColorModeValue('gray.600', 'white')}
             minH={'60px'}
             py={{ base: 2 }}
-            px={{ base: 4, lg: "5%", xl: "10%" }}
+            px={{ base: 4, md: "5%", xl: "10%" }}
             borderBottom={1}
             borderStyle={'solid'}
             borderColor={useColorModeValue('gray.200', 'gray.900')}
@@ -51,7 +51,7 @@ export default function WithSubnavigation() {
             <Text
                 textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
                 fontFamily={'heading'}
-                color={'green.400'}
+                color='black'
                 fontWeight={600}
             >
                 Marketowns

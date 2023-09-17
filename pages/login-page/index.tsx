@@ -10,7 +10,7 @@ import {
     Button,
     Text
 } from "@chakra-ui/react";
-import { loginUser } from '@/hooks/awsCognito';
+import { loginUser } from '@/aws/awsCognito';
 import { useRouter } from 'next/router';
 
 const LoginPage = () => {

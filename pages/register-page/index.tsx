@@ -12,7 +12,7 @@ import {
 import styles from "./register-page.module.scss";
 import { useRouter } from "next/router";
 // AWS functions
-import { registerUser, verifyUser } from "@/hooks/awsCognito";
+import { registerUser, verifyUser } from "@/aws/awsCognito";
 
 const RegisterPage = () => {
     const router = useRouter();

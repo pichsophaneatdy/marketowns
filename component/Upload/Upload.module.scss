@@ -1,0 +1,60 @@
+// React Drop Zone
+.container {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0rem auto;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.dropzone {
+    height: 10rem;
+    margin: 1rem 0;
+    background: #eee;
+    border: 2px dashed #aaa;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-weight: 500;
+    padding: 0 1rem;
+}
+
+.images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    width: 100%;
+    grid-gap: 1rem;
+    &__img{
+        height: 15rem;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        filter: brightness(0.7)
+    }
+    &__preview{
+        position: relative;
+    }
+    &__delete__container{
+        cursor: pointer;
+        position:absolute;
+        top: 40%;
+        left: 40%;
+        background-color: white;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+            background-color:lightcoral;
+            transition: all 0.3s;
+        }
+    }
+    &__delete-icon {
+        width: 25px;
+        height: 25px;
+    }
+}
