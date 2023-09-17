@@ -76,7 +76,7 @@ const LoginPage = () => {
                                 spinnerPlacement='end'
                             ></Button>
                         ): (
-                            <Button onClick={handleSubmit} mt="5" colorScheme='teal' size='sm'>
+                            <Button onClick={handleSubmit} mt="5" colorScheme='green' size='sm'>
                                 Login
                             </Button>
                         )

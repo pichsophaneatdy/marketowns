@@ -94,3 +94,12 @@ export const getCurrentUser = async() => {
         }
     })
 }
+
+export const logout = async() => {
+    return new Promise((resolve, reject) => {
+        const cognitoUser = userPool.getCurrentUser();
+        if(cognitoUser != null) {
+            cognitoUser.signOut();
+        }
+    })
+}

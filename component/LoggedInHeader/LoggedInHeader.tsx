@@ -1,5 +1,3 @@
-'use client'
-
 import {
     Box,
     Flex,
@@ -16,24 +14,24 @@ import {
     useBreakpointValue,
     useDisclosure,
 } from '@chakra-ui/react'
-import {
-    HamburgerIcon,
-    CloseIcon,
-    ChevronDownIcon,
-    ChevronRightIcon,
-} from '@chakra-ui/icons'
+import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon} from '@chakra-ui/icons';
+import { useRouter } from 'next/router';
+// AWS Sign out function
+import { logout } from '@/hooks/awsCognito';
 
 export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure()
 
+    const router = useRouter();
+
     return (
-        <Box>
+        <Box >
         <Flex
             bg={useColorModeValue('white', 'gray.800')}
             color={useColorModeValue('gray.600', 'white')}
             minH={'60px'}
             py={{ base: 2 }}
-            px={{ base: 4 }}
+            px={{ base: 4, lg: "5%", xl: "10%" }}
             borderBottom={1}
             borderStyle={'solid'}
             borderColor={useColorModeValue('gray.200', 'gray.900')}
@@ -53,7 +51,7 @@ export default function WithSubnavigation() {
             <Text
                 textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
                 fontFamily={'heading'}
-                color="tomato"
+                color={'green.400'}
                 fontWeight={600}
             >
                 Marketowns
@@ -70,15 +68,8 @@ export default function WithSubnavigation() {
             direction={'row'}
             spacing={3}>
             <Button 
-                bg={'red.400'} 
-                color={'white'} 
-                as={'a'} 
-                fontSize={'sm'} 
-                href={'#'}
-                fontWeight={600}
-                _hover={{
-                    bg: 'red.300',
-                }}
+                onClick={()=>logout()}
+                as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'/login-page'}
             >
                 Log out
             </Button>
@@ -88,10 +79,10 @@ export default function WithSubnavigation() {
                 fontSize={'sm'}
                 fontWeight={600}
                 color={'white'}
-                bg={'red.400'}
-                href={'#'}
+                bg={'green.400'}
+                href={'/product_form'}
                 _hover={{
-                bg: 'red.300',
+                bg: 'green.300',
                 }}>
                 Sell a product
             </Button>

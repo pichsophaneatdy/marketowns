@@ -4,8 +4,7 @@ import {Inter} from "next/font/google";
 import { ChakraProvider } from '@chakra-ui/react';
 import { getCurrentUser } from '@/hooks/awsCognito';
 import { useState, useEffect } from 'react';
-import Head from 'next/head';
-
+import { useRouter } from 'next/router';
 
 // Headers
 import LoggedOutHeader from '@/component/LoggedOutHeader/LoggedOutHeader';
@@ -14,6 +13,9 @@ import LoggedInHeader from '@/component/LoggedInHeader/LoggedInHeader';
 const inter = Inter({subsets: ['latin']});
 
 export default function App({ Component, pageProps }: AppProps) {
+
+  const router = useRouter();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     getCurrentUser()
@@ -23,7 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
       .catch(() => {
         setIsLoggedIn(false);
       })
-  }, [])
+  }, [router.pathname])
 
   return ( 
     <ChakraProvider>

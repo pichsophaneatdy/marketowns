@@ -157,7 +157,7 @@ const RegisterPage = () => {
                                         spinnerPlacement='end'
                                     ></Button>
                                 ): (
-                                    <Button onClick={handleSubmit} mt="5" colorScheme='teal' size='sm'>
+                                    <Button onClick={handleSubmit} mt="5" colorScheme='green' bgColor={'green.400'} size='sm'>
                                         Register
                                     </Button>
                                 )
@@ -186,14 +186,14 @@ const RegisterPage = () => {
                                     <Button
                                         isLoading
                                         loadingText='Loading'
-                                        colorScheme='teal'
+                                        colorScheme='green'
                                         variant='outline'
                                         spinnerPlacement='end'
                                         w="100%"
                                         mt="5"
                                     ></Button>
                                 ): (
-                                    <Button w="100%" onClick={handleVerify} mt="5" colorScheme='teal' size='sm'>
+                                    <Button w="100%" onClick={handleVerify} mt="5" colorScheme='green' size='sm'>
                                         Verify
                                     </Button>
                                 )
