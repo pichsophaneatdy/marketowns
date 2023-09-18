@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import styles from "./login-page.module.scss";
 import {
     FormControl,
@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { loginUser } from '@/aws/awsCognito';
 import { useRouter } from 'next/router';
+import { getCurrentUser } from '@/aws/awsCognito';
 
 const LoginPage = () => {
 
@@ -34,6 +35,17 @@ const LoginPage = () => {
             console.log(error)
         }
     }
+
+    useEffect(() => {
+        getCurrentUser()
+            .then(() => {
+                router.push("/dashboard")
+            })
+            .catch((error) => {
+
+            })
+    }, [])
+
     return (
         <section className={styles.login}>
             <h1 className={styles.login__title}>Login to Marketowns</h1>

@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 // Headers
 import LoggedOutHeader from '@/component/LoggedOutHeader/LoggedOutHeader';
 import LoggedInHeader from '@/component/LoggedInHeader/LoggedInHeader';
+import { RouteMatcher } from 'next/dist/server/future/route-matchers/route-matcher';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -30,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return ( 
     <ChakraProvider>
       <main className={`${inter.className}`}>
-        {isLoggedIn ? <LoggedInHeader /> : <LoggedOutHeader />}
+        {isLoggedIn && (router.pathname !== "/")  ? <LoggedInHeader /> : <LoggedOutHeader />}
         <Component {...pageProps} />
       </main>
     </ChakraProvider>

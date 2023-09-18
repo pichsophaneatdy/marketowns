@@ -12,7 +12,7 @@ import {
 import styles from "./register-page.module.scss";
 import { useRouter } from "next/router";
 // AWS functions
-import { registerUser, verifyUser } from "@/aws/awsCognito";
+import { getCurrentUser, registerUser, verifyUser } from "@/aws/awsCognito";
 
 const RegisterPage = () => {
     const router = useRouter();
@@ -83,6 +83,16 @@ const RegisterPage = () => {
         setVerificationError("");
     }, [code])
 
+    // Check if the user is log in alreafy
+    useEffect(() => {
+        getCurrentUser()
+            .then(() => {
+                router.push("/dashboard")
+            })
+            .catch((error) => {
+                
+            })
+    }, [])
     return (
         <section className={styles.register}>
             {

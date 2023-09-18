@@ -1,41 +1,39 @@
 import { useState } from 'react'
 import { Select, Stack, Text, FormControl, FormLabel, Input, Textarea, Button} from '@chakra-ui/react'
 import axios from 'axios'
+// Product Form Data
+import { sizes } from '@/data/productData';
+import {categories } from '@/data/productData';
+import { productConditions } from '@/data/productData';
 // Component
 import Upload from '@/component/Upload/Upload';
 
 const ProductForm = () => {
     // Form States
     const [selectedImages, setSelectedImage] = useState<File[]>([]);
+    const [imageKeys, setImageKeys] = useState<string[]>()
     // handle submit
     const handleSubmit = async(event: React.FormEvent) => {
         event.preventDefault();
-        const keys = [];
+        const keys: string[] = [];
         
         try {
             for(let i = 0; i < selectedImages.length; i++) {
                 const image = selectedImages[i];
 
                 // Create a new FormData object for the current image
+                const formData = new FormData();
+                formData.append("file", image);
+
+                const response = await axios.post("/api/upload", formData);
+                keys.push(response.data.key);
             }
         } catch(error) {
             console.log(error);
         }
-        
-        
-    }
+        setImageKeys(keys);
+    }   
 
-    const uploadToS3 = async (image: File): Promise<string> => {
-        const formData = new FormData();
-        formData.append("file", image);
-
-        const response = await axios.post("/api/upload-to-s3", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        })
-        return response.data.key;
-    }
     return (
         <Stack bgColor={'gray.100'} minH={'100vh'} spacing={1} px={{base:"4", md:"5%", lg: "10%", xl: "25%"}} py={{base: "2rem", md: "4rem"}}>
             <Text fontWeight="600" fontSize={{base: 'lg'}}>Post your product today!</Text>
@@ -90,7 +88,7 @@ const ProductForm = () => {
                     <Textarea bgColor="white" fontSize="sm" placeholder='A short description about your product' />
                 </FormControl>
                 <FormControl>
-                    <FormLabel fontSize="sm">Upload maximum three images of your products</FormLabel>
+                    <FormLabel fontSize="sm">Upload maximum three images of your products (Image size should not exceed 1MB)</FormLabel>
                     <Upload selectedImages={selectedImages} setSelectedImages={setSelectedImage} />
                 </FormControl>
                 <Button onClick={handleSubmit} px={10} maxW={'200px'} bgColor={'green.400'} _hover={{bgColor: "green.500"}} color={'white'}>Submit</Button>
@@ -98,67 +96,5 @@ const ProductForm = () => {
         </Stack>
     )
 }
-const sizes = [
-    "Small",
-    "Medium",
-    "Large",
-    "Extra-Large (XL)",
-    "Extra-Small (XS)",
-    "Petite",
-    "Plus Size",
-    "Tall",
-    "Short",
-    "One Size Fits All",
-    "Youth Sizes",
-    "Adult Sizes",
-    "Baby Sizes",
-    "Toddler Sizes",
-    "Maternity Sizes",
-    "Junior Sizes",
-    "Misses Sizes",
-    "Men's Sizes",
-    "Women's Sizes",
-    "Unisex Sizes"
-];
-
-const categories = [
-    "Electronics",
-    "Home and Garden",
-    "Vehicles",
-    "Clothing and Accessories",
-    "Toys and Games",
-    "Sports and Fitness",
-    "Collectibles and Memorabilia",
-    "Books, Music, and Movies",
-    "Health and Beauty",
-    "Baby and Kids",
-    "Pet Supplies",
-    "Art and Crafts",
-    "Hobbies and Collectibles",
-    "Jewelry and Watches",
-    "Outdoor and Camping",
-    "Home Appliances",
-    "Gardening and Plants",
-    "Musical Instruments",
-    "Office Supplies",
-    "Industrial Equipment"
-];
-
-const productConditions = [
-    "New",
-    "Like New",
-    "Excellent",
-    "Very Good",
-    "Good",
-    "Fair",
-    "Acceptable",
-    "Used",
-    "Refurbished",
-    "Open Box",
-    "Damaged",
-    "For Parts",
-    "Not Working"
-];
-
 
 export default ProductForm
