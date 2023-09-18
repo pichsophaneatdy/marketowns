@@ -5,7 +5,6 @@ import {
     ICognitoUserPoolData,
     AuthenticationDetails,
 } from 'amazon-cognito-identity-js';
-import * as AWS from 'aws-sdk/global';
 
 const poolData: ICognitoUserPoolData = {
     UserPoolId: process.env.NEXT_PUBLIC_AWS_COGNITO_POOL_ID!,

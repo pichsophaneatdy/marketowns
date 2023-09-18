@@ -1,5 +1,6 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import { Select, Stack, Text, FormControl, FormLabel, Input, Textarea, Button} from '@chakra-ui/react'
+import axios from 'axios'
 // Component
 import Upload from '@/component/Upload/Upload';
 
@@ -9,6 +10,31 @@ const ProductForm = () => {
     // handle submit
     const handleSubmit = async(event: React.FormEvent) => {
         event.preventDefault();
+        const keys = [];
+        
+        try {
+            for(let i = 0; i < selectedImages.length; i++) {
+                const image = selectedImages[i];
+
+                // Create a new FormData object for the current image
+            }
+        } catch(error) {
+            console.log(error);
+        }
+        
+        
+    }
+
+    const uploadToS3 = async (image: File): Promise<string> => {
+        const formData = new FormData();
+        formData.append("file", image);
+
+        const response = await axios.post("/api/upload-to-s3", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
+        return response.data.key;
     }
     return (
         <Stack bgColor={'gray.100'} minH={'100vh'} spacing={1} px={{base:"4", md:"5%", lg: "10%", xl: "25%"}} py={{base: "2rem", md: "4rem"}}>
