@@ -1,37 +1,48 @@
 import { useState } from 'react'
 import { Select, Stack, Text, FormControl, FormLabel, Input, Textarea, Button} from '@chakra-ui/react'
-import axios from 'axios'
+import { v4 as uuidv4 } from 'uuid';
 // Product Form Data
 import { sizes } from '@/data/productData';
 import {categories } from '@/data/productData';
 import { productConditions } from '@/data/productData';
 // Component
 import Upload from '@/component/Upload/Upload';
+// Upload function
+import { handleUpload } from '@/functions/cloudinary';
 
 const ProductForm = () => {
+
     // Form States
+    const [name, setName] = useState<string>("");
+    const [price, setPrice] = useState<number>(0);
+    const [category, setCategory] = useState<number>(0);
+    const [size, setSize] = useState<string>("");
+    const [color, setColor] = useState<string>("");
+    const [condition, setCondition] = useState<string>("");
+    const [desc, setDesc] = useState<string>("");
     const [selectedImages, setSelectedImage] = useState<File[]>([]);
-    const [imageKeys, setImageKeys] = useState<string[]>()
+
     // handle submit
     const handleSubmit = async(event: React.FormEvent) => {
         event.preventDefault();
-        const keys: string[] = [];
-        
         try {
-            for(let i = 0; i < selectedImages.length; i++) {
-                const image = selectedImages[i];
-
-                // Create a new FormData object for the current image
-                const formData = new FormData();
-                formData.append("file", image);
-
-                const response = await axios.post("/api/upload", formData);
-                keys.push(response.data.key);
+            // const urls = await handleUpload(selectedImages);
+            const newProduct = {
+                product_id: uuidv4(),
+                category_id: category,
+                color: color,
+                condition: condition,
+                date: new Date().getTime(),
+                desc: desc,
+                image: "whatever",
+                name:name,
+                price: price, 
+                size: size
             }
+            console.log(newProduct)
         } catch(error) {
             console.log(error);
         }
-        setImageKeys(keys);
     }   
 
     return (
@@ -41,19 +52,19 @@ const ProductForm = () => {
             <Stack alignItems={'center'} py={{base: "5"}} spacing={{base: 3, md: 5}}>
                 <FormControl>
                     <FormLabel fontSize="sm">Product Name</FormLabel>
-                    <Input borderRadius={4} bgColor="white" size="sm" type='text' />
+                    <Input value={name} onChange={(e) => setName(e.target.value)} borderRadius={4} bgColor="white" size="sm" type='text' />
                 </FormControl>
                 <FormControl>
                     <FormLabel fontSize="sm">Price</FormLabel>
-                    <Input borderRadius={4} bgColor="white"  size="sm" type='number' />
+                    <Input value={price} onChange={(e) => setPrice(Number(e.target.value))} borderRadius={4} bgColor="white"  size="sm" type='number' />
                 </FormControl>
                 <FormControl>
                     <FormLabel fontSize="sm">Category</FormLabel>
                     <Stack spacing={3}>
-                        <Select borderRadius={4} bgColor="white" placeholder='Select product category' size='sm'>
+                        <Select value={category} onChange={(e) => setCategory(Number(e.target.value))} borderRadius={4} bgColor="white" placeholder='Select product category' size='sm'>
                             {
                                 categories.map((category: string, index:number) => {
-                                    return <option key={index} value={category}>{category}</option>
+                                    return <option key={index} value={index}>{category}</option>
                                 })
                             }
                         </Select>
@@ -62,7 +73,7 @@ const ProductForm = () => {
                 <FormControl>
                     <FormLabel fontSize="sm">Size</FormLabel>
                     <Stack spacing={3}>
-                        <Select borderRadius={4} bgColor="white" placeholder='Select product size' size='sm'>
+                        <Select value={size} onChange={(e) => setSize(e.target.value)} borderRadius={4} bgColor="white" placeholder='Select product size' size='sm'>
                             {
                                 sizes.map((size: string, index: number) => {
                                     return <option key={index} value={size}>{size}</option>
@@ -72,9 +83,13 @@ const ProductForm = () => {
                     </Stack>
                 </FormControl>
                 <FormControl>
+                    <FormLabel fontSize="sm">Color</FormLabel>
+                    <Input value={color} onChange={(e) => setColor(e.target.value)} borderRadius={4} bgColor="white"  size="sm" type='number' />
+                </FormControl>
+                <FormControl>
                     <FormLabel fontSize="sm">Condition</FormLabel>
                     <Stack spacing={3}>
-                        <Select borderRadius={4} bgColor="white" placeholder='Select product condition' size='sm'>
+                        <Select value={condition} onChange={(e) => setCondition(e.target.value)} borderRadius={4} bgColor="white" placeholder='Select product condition' size='sm'>
                             {
                                 productConditions.map((condition: string, index: number) => {
                                     return <option key={index} value={condition}>{condition}</option>
@@ -85,7 +100,7 @@ const ProductForm = () => {
                 </FormControl>
                 <FormControl>
                     <FormLabel fontSize="sm">Description</FormLabel>
-                    <Textarea bgColor="white" fontSize="sm" placeholder='A short description about your product' />
+                    <Textarea value={desc} onChange={(e) => setDesc(e.target.value)} bgColor="white" fontSize="sm" placeholder='A short description about your product' />
                 </FormControl>
                 <FormControl>
                     <FormLabel fontSize="sm">Upload maximum three images of your products (Image size should not exceed 1MB)</FormLabel>
