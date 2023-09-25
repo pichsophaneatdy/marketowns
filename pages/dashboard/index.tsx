@@ -16,7 +16,7 @@ const dashboard = (props:any) => {
 
     useEffect(() => {
         getCurrentUser()
-            .then(() => {
+            .then((response) => {
                 setIsLoading(false);
             })
             .catch(() => {

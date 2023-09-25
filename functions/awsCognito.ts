@@ -78,7 +78,7 @@ export const loginUser = async(username: string, password: string) => {
     })
 }
 
-export const getCurrentUser = async(): Promise<{username: string, idToken: string}> => {
+export const getCurrentUser = async(): Promise<{username: string, idToken: any}> => {
     return new Promise((resolve, reject) => {
         const cognitorUser = userPool.getCurrentUser();
         if(cognitorUser != null) {
@@ -86,7 +86,7 @@ export const getCurrentUser = async(): Promise<{username: string, idToken: strin
                 if(err) {
                     reject(err);
                 }
-                resolve({username: cognitorUser?.getUsername(), idToken: session.getIdToken().getJwtToken()});
+                resolve({username: cognitorUser.getUsername(), idToken: session.getIdToken().getJwtToken()});
             })
         } else {
             reject(new Error("Not Authenticated"));

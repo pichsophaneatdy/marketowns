@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import { Select, Stack, Text, FormControl, FormLabel, Input, Textarea, Button} from '@chakra-ui/react'
 import { v4 as uuidv4 } from 'uuid';
+import axios from "axios"
 // Product Form Data
 import { sizes } from '@/data/productData';
 import {categories } from '@/data/productData';
@@ -9,6 +10,8 @@ import { productConditions } from '@/data/productData';
 import Upload from '@/component/Upload/Upload';
 // Upload function
 import { handleUpload } from '@/functions/cloudinary';
+// Cognito
+import { getCurrentUser } from '@/functions/awsCognito';
 
 const ProductForm = () => {
 
@@ -26,20 +29,29 @@ const ProductForm = () => {
     const handleSubmit = async(event: React.FormEvent) => {
         event.preventDefault();
         try {
-            // const urls = await handleUpload(selectedImages);
+            const urls = await handleUpload(selectedImages);
+            const currentUser = await getCurrentUser();
+            console.log(currentUser.idToken)
             const newProduct = {
                 product_id: uuidv4(),
+                seller_id: currentUser.username,
                 category_id: category,
                 color: color,
                 condition: condition,
                 date: new Date().getTime(),
                 desc: desc,
-                image: "whatever",
+                images: urls,
                 name:name,
                 price: price, 
                 size: size
             }
             console.log(newProduct)
+            const response = await axios.post("https://iqkyzfpq17.execute-api.us-east-1.amazonaws.com/dev/product", newProduct, {
+                headers: {
+                    Authorization: currentUser.idToken
+                }
+            })
+            console.log(response)
         } catch(error) {
             console.log(error);
         }
@@ -84,7 +96,7 @@ const ProductForm = () => {
                 </FormControl>
                 <FormControl>
                     <FormLabel fontSize="sm">Color</FormLabel>
-                    <Input value={color} onChange={(e) => setColor(e.target.value)} borderRadius={4} bgColor="white"  size="sm" type='number' />
+                    <Input value={color} onChange={(e) => setColor(e.target.value)} borderRadius={4} bgColor="white"  size="sm" type='string' />
                 </FormControl>
                 <FormControl>
                     <FormLabel fontSize="sm">Condition</FormLabel>
