@@ -1,78 +1,77 @@
-'use client'
-
 import {
+    Flex,
     Box,
-    Center,
-    useColorModeValue,
-    Heading,
-    Text,
-    Stack,
     Image,
+    Text,
+    useColorModeValue,
 } from '@chakra-ui/react'
+import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs'
+import { FiShoppingCart } from 'react-icons/fi'
 
-const IMAGE =
-    'https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'
+interface RatingProps {
+    rating: number
+    numReviews: number
+}
 
-export default function ProductCard() {
+interface CardProps {
+    rating: number,
+    numReviews: number,
+    isNew: boolean,
+    imageURL: string,
+    name: string, 
+    price: number,
+}
+
+function Rating({ rating, numReviews }: RatingProps) {
     return (
-        <Center py={12}>
-        <Box
-            flexGrow={1}
-            role={'group'}
-            p={6}
-            w={'100%'}
-            bg={useColorModeValue('white', 'gray.800')}
-            rounded={'lg'}
-            pos={'relative'}
-            zIndex={1}>
-            <Box
-            rounded={'lg'}
-            mt={-12}
-            pos={'relative'}
-            height={'230px'}
-            _after={{
-                transition: 'all .3s ease',
-                content: '""',
-                w: 'full',
-                h: 'full',
-                pos: 'absolute',
-                top: 5,
-                left: 0,
-                backgroundImage: `url(${IMAGE})`,
-                filter: 'blur(15px)',
-                zIndex: -1,
-            }}
-            _groupHover={{
-                _after: {
-                filter: 'blur(10px)',
-                },
-            }}>
-            <Image
-                rounded={'lg'}
-                height={230}
-                width={282}
-                objectFit={'cover'}
-                src={IMAGE}
-                alt="#"
-            />
-            </Box>
-            <Stack pt={10} align={'center'}>
-            <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
-                Brand
-            </Text>
-            <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-                Nice Chair, pink
-            </Heading>
-            <Stack direction={'row'} align={'center'}>
-                <Text fontWeight={800} fontSize={'xl'}>
-                $57
-                </Text>
-                <Text textDecoration={'line-through'} color={'gray.600'}>
-                $199
-                </Text>
-            </Stack>
-            </Stack>
+        <Box display="flex" alignItems="center">
+        {Array(5)
+            .fill('')
+            .map((_, i) => {
+            const roundedRating = Math.round(rating * 2) / 2
+            if (roundedRating - i >= 1) {
+                return (
+                <BsStarFill
+                    key={i}
+                    style={{ marginLeft: '1' }}
+                    color={i < rating ? 'teal.500' : 'gray.300'}
+                />
+                )
+            }
+            if (roundedRating - i === 0.5) {
+                return <BsStarHalf key={i} style={{ marginLeft: '1' }} />
+            }
+            return <BsStar key={i} style={{ marginLeft: '1' }} />
+            })}
+        <Box as="span" ml="2" color="gray.600" fontSize="sm">
+            {numReviews} review{numReviews > 1 && 's'}
         </Box>
-        </Center>
+    </Box>
     )
 }
+
+const ProductCard: React.FC<CardProps> = ({rating, numReviews, isNew, imageURL, name, price}) => {
+    return (
+        <Flex
+            cursor={'pointer'}
+            flexDirection={"column"} 
+            bg={useColorModeValue('white', 'gray.800')}
+            borderWidth="1px"
+            rounded="md"
+            shadow="lg" 
+            w={{base: "100%", md: "48%" , lg: "31%", xl: "23%"}}
+        >
+            <Image roundedTop="md" height={{base: "200px"}} w="full" objectFit={"cover"}  src={imageURL} alt={name}/>
+            <Box p={{base: 4}}>
+                <Flex justifyContent={"space-between"}>
+                    <Text fontWeight={"500"}>{name}</Text>
+                    <Text>${price}</Text>
+                </Flex>
+                
+            </Box>
+            
+        </Flex>
+    )
+}
+
+export default ProductCard

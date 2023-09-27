@@ -27,7 +27,7 @@ export default function Filter() {
     const btnRef: any= useRef();
 
     return (
-        <Flex mx={{base: 2, sm: "auto"}} gap={{base: 2}} maxW={"600px"}>
+        <Flex px={4} mx={{sm: "auto"}} gap={{base: 2}} maxW={"600px"}>
             <Input size={{base: "sm"}} borderRadius={{base: 4}} placeholder='Search for an item' />
             <Button size={{base: "sm"}} borderRadius={{base: 4}} bgColor={"green.400"} ref={btnRef} colorScheme='green' onClick={onOpen}>
                 Filter

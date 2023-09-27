@@ -1,4 +1,6 @@
 import React from 'react'
+import ProductCard from '../ProductCard/ProductCard'
+import { Flex } from '@chakra-ui/react'
 
 interface Product {
     category_id: number,
@@ -18,13 +20,23 @@ interface ProductListProp {
 }
 const ProductList: React.FC<ProductListProp> = ({data}) => {
     return (
-        <div>
+            <Flex py={{base: 10}} px={{base: 0, md: 4, lg: 8}} flexWrap={"wrap"} gap={{base: 4, md: 6, lg: 8}} flexDirection={{base: "column", md: "row"}} justifyContent={{md: "space-between"}}>
             {
                 data?.map((product) => {
-                    return <p>{product.name}</p>
+                    return (
+                        <ProductCard 
+                            isNew={true}
+                            rating={4}
+                            numReviews={400}
+                            imageURL={product.images[0]}
+                            name={product.name}
+                            price={Number(product.price)}
+                        />
+                    )
                 })
             }
-        </div>
+            </Flex>
+        
     )
 }
 
