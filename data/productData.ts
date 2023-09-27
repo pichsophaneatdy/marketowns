@@ -59,3 +59,5 @@ export const productConditions = [
     "For Parts",
     "Not Working"
 ];
+
+export const colors = ["Red", "Green", "Blue", "Yellow", "Orange", "Purple", "Pink", "Brown", "Gray", "Black", "White", "Cyan", "Magenta", "Turquoise", "Lavender", "Olive", "Teal", "Maroon", "Gold", "Silver"]

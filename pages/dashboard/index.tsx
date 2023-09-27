@@ -7,11 +7,11 @@ import {Flex, Text, Center} from "@chakra-ui/react";
 // Components
 import ProductCard from '@/component/ProductCard/ProductCard';
 import Filter from '@/component/Filter/Filter';
-
+import ProductList from '@/component/ProductList/ProductList';
 
 const dashboard = (props:any) => {
     const [isLoading, setIsLoading] = useState(true);
-
+    console.log(props.data)
     const router = useRouter();
 
     useEffect(() => {
@@ -35,13 +35,7 @@ const dashboard = (props:any) => {
             </Center>
             <Filter />
             <section className={styles.dashboard}>
-                <Flex flexWrap={'wrap'} justifyContent={'space-evenly'}>
-                {
-                    props.data.map((product:any) => {
-                        return <ProductCard key={product.product_id}/>
-                    })
-                }
-                </Flex>
+                <ProductList data={props.data}/>
             </section>      
         </>
     )
