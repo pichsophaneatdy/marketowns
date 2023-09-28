@@ -25,9 +25,7 @@ const ProductList: React.FC<ProductListProp> = ({data}) => {
                 data?.map((product) => {
                     return (
                         <ProductCard 
-                            isNew={true}
-                            rating={4}
-                            numReviews={400}
+                            product_id={product.product_id}
                             imageURL={product.images[0]}
                             name={product.name}
                             price={Number(product.price)}

@@ -87,7 +87,7 @@ const RegisterPage = () => {
     useEffect(() => {
         getCurrentUser()
             .then(() => {
-                router.push("/dashboard")
+                router.push("/products")
             })
             .catch((error) => {
                 

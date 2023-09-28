@@ -29,8 +29,7 @@ const LoginPage = () => {
         e.preventDefault();
         try {
             const data = await loginUser(username, pwd);
-            console.log("success")
-            router.push("/dashboard");
+            router.push("/products");
         } catch(error) {
             console.log(error)
         }
@@ -39,7 +38,7 @@ const LoginPage = () => {
     useEffect(() => {
         getCurrentUser()
             .then(() => {
-                router.push("/dashboard")
+                router.push("/products")
             })
             .catch((error) => {
 
