@@ -247,7 +247,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
     const NAV_ITEMS: Array<NavItem> = [
     {
         label: 'All Products',
-        href: "#"
+        href: "/products"
     },
     {
         label: 'Your Cart',
