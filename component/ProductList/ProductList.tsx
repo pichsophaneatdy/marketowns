@@ -25,6 +25,7 @@ const ProductList: React.FC<ProductListProp> = ({data}) => {
                 data?.map((product) => {
                     return (
                         <ProductCard 
+                            key={product.product_id}
                             product_id={product.product_id}
                             imageURL={product.images[0]}
                             name={product.name}

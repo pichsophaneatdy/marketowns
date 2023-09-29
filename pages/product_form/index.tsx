@@ -6,6 +6,7 @@ import axios from "axios"
 import { sizes } from '@/data/productData';
 import {categories } from '@/data/productData';
 import { productConditions } from '@/data/productData';
+import { colors } from "@/data/productData";
 // Component
 import Upload from '@/component/Upload/Upload';
 import Confirmation from '@/component/Confirmation';
@@ -116,7 +117,13 @@ const ProductForm = () => {
                 </FormControl>
                 <FormControl>
                     <FormLabel fontSize="sm">Color</FormLabel>
-                    <Input value={color} onChange={(e) => setColor(e.target.value)} borderRadius={4} bgColor="white"  size="sm" type='string' />
+                    <Select value={color} onChange={(e) => setColor(e.target.value)} borderRadius={4} bgColor="white" placeholder='Select color' size='sm'>
+                            {
+                                colors.map((color: string, index: number) => {
+                                    return <option key={index} value={color}>{color}</option>
+                                })
+                            }
+                        </Select>
                 </FormControl>
                 <FormControl>
                     <FormLabel fontSize="sm">Condition</FormLabel>
@@ -145,7 +152,6 @@ const ProductForm = () => {
                         <Button onClick={handleSubmit} px={10} maxW={'200px'} bgColor={'green.400'} _hover={{bgColor: "green.500"}} color={'white'}>Submit</Button>
                     )
                 }
-                
             </Stack>
         </Stack>
     )

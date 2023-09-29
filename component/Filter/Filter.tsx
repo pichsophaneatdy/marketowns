@@ -22,7 +22,21 @@ import { sizes } from '@/data/productData';
 import { colors } from "@/data/productData";
 import { productConditions } from '@/data/productData';
 
-export default function Filter() {
+
+interface FilterProps {
+    price: number
+    setPrice: (value: number) => void
+    category: number
+    setCategory: (value: number) => void
+    size: string
+    setSize: (value: string) => void
+    color: string
+    setColor: (value: string) => void
+    condition: string
+    setCondition: (value: string) => void
+    handleFilter: () => void
+}
+const Filter: React.FC<FilterProps> = ({price, setPrice, category, setCategory, size, setSize, color, setColor, condition, setCondition, handleFilter}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef: any= useRef();
 
@@ -46,18 +60,28 @@ export default function Filter() {
                 <DrawerBody>
                     <Stack spacing={4}>
                         <FormControl>
+                            <FormLabel>Price</FormLabel>
+                            <Select value={price} onChange={(e) => setPrice(Number(e.target.value))} placeholder='Select price range'>
+                                <option value={1}>0 - $25</option>
+                                <option value={2}>$25 - $50</option>
+                                <option value={3}>$50 - $75</option>
+                                <option value={4}>$75 - $100</option>
+                                <option value={5}>$100+</option>  
+                            </Select>
+                        </FormControl>
+                        <FormControl>
                             <FormLabel>Category</FormLabel>
-                            <Select placeholder='Select category'>
+                            <Select value={category} onChange={(e) => setCategory(Number(e.target.value))} placeholder='Select category'>
                                 {
                                     categories.map((category: string, index: number) => {
-                                        return <option key={index} value={category}>{category}</option>
+                                        return <option key={index} value={index}>{category}</option>
                                     })
                                 }
                             </Select>
                         </FormControl>
                         <FormControl>
                             <FormLabel>Size</FormLabel>
-                            <Select placeholder='Select size'>
+                            <Select value={size} onChange={(e) => setSize(e.target.value)} placeholder='Select size'>
                                 {
                                     sizes.map((size: string, index: number) => {
                                         return <option key={index} value={size}>{size}</option>
@@ -67,7 +91,7 @@ export default function Filter() {
                         </FormControl>
                         <FormControl>
                             <FormLabel>Color</FormLabel>
-                            <Select placeholder='Select color'>
+                            <Select value={color} onChange={(e) => setColor(e.target.value)} placeholder='Select color'>
                                 {
                                     colors.map((color: string, index: number) => {
                                         return <option key={index} value={color}>{color}</option>
@@ -77,7 +101,7 @@ export default function Filter() {
                         </FormControl>
                         <FormControl>
                             <FormLabel>Condition</FormLabel>
-                            <Select placeholder='Select condition'>
+                            <Select value={condition} onChange={(e) => setCondition(e.target.value)} placeholder='Select condition'>
                                 {
                                     productConditions.map((condition: string, index: number) => {
                                         return <option key={index} value={condition}>{condition}</option>
@@ -92,10 +116,12 @@ export default function Filter() {
                 <Button size={{base: "sm"}} variant='outline' mr={3} onClick={onClose}>
                     Cancel
                 </Button>
-                <Button size={{base: "sm"}} colorScheme='green' bgColor={"green.400"}>Save</Button>
+                <Button onClick={handleFilter} size={{base: "sm"}} colorScheme='green' bgColor={"green.400"}>Filter</Button>
                 </DrawerFooter>
             </DrawerContent>
             </Drawer>
         </ Flex>
     )
 }
+
+export default Filter
