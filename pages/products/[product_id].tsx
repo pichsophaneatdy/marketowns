@@ -29,13 +29,13 @@ const Product_Page = (props: any) => {
     console.log(product)
     return (
         (
-            <Container maxW={'7xl'}>
+            <Container maxW={'7xl'} pb={{ base: 18, md: 24 }} pt={{base: 8, md: 10, lg: 14}}>
+                <Button onClick={()=>router.back()} leftIcon={<FiArrowLeft />} mb={4} bgColor="transparent">Go back</Button>
                 <SimpleGrid
                     columns={{ base: 1, lg: 2 }}
                     spacing={{ base: 8, md: 10 }}
-                    py={{ base: 18, md: 24 }}>
+                >
                     <Flex flexDirection={"column"} alignItems={"start"}>
-                        <Button onClick={()=>router.back()} leftIcon={<FiArrowLeft />} mb={4} bgColor="transparent">Go back</Button>
                         <Image
                             rounded={'md'}
                             alt={'product image'}
@@ -51,10 +51,11 @@ const Product_Page = (props: any) => {
                         <Heading
                         lineHeight={1.1}
                         fontWeight={600}
-                        fontSize={{ base: '2xl', sm: '4xl', lg: '5xl' }}>
+                        fontSize={{ base: '2xl', sm: '4xl' }}>
                         {product.name}
                         </Heading>
                         <Text
+                        mt={4}
                         color={useColorModeValue('gray.900', 'gray.400')}
                         fontWeight={300}
                         fontSize={'2xl'}>
