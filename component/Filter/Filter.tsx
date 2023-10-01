@@ -1,4 +1,4 @@
-import { useRef, RefObject } from 'react'
+import { useRef } from 'react'
 import {
     Flex,
     Drawer,
@@ -37,14 +37,16 @@ interface FilterProps {
     condition: string
     setCondition: (value: string) => void
     handleFilter: (e: React.FormEvent) => void
+    searchTerm: string
+    setSearchTerm: (val: string) => void
 }
-const Filter: React.FC<FilterProps> = ({price, setPrice, category, setCategory, size, setSize, color, setColor, condition, setCondition, handleFilter}) => {
+const Filter: React.FC<FilterProps> = ({searchTerm, setSearchTerm, price, setPrice, category, setCategory, size, setSize, color, setColor, condition, setCondition, handleFilter}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef: any= useRef();
 
     return (
         <Flex px={4} mx={{sm: "auto"}} gap={{base: 2}} maxW={"600px"}>
-            <Input size={{base: "sm"}} borderRadius={{base: 4}} placeholder='Search for an item' />
+            <Input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} size={{base: "sm"}} borderRadius={{base: 4}} placeholder='Search for an item' />
             <Button size={{base: "sm"}} borderRadius={{base: 4}} bgColor={"green.400"} ref={btnRef} colorScheme='green' onClick={onOpen}>
                 Filter
             </Button>

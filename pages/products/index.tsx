@@ -28,6 +28,7 @@ const dashboard = (props:any) => {
     const [isLoading, setIsLoading] = useState(true);
     // Filtering states
     const [filterProducts, setFilterProduct] = useState<Product[]>(props.data)
+    const [searchTerm, setSearchTerm] = useState<string>("")
     const [price, setPrice] = useState({min: 0, max: 1000});
     const [category, setCategory] = useState<number>(0);
     const [size, setSize] = useState<string>("");
@@ -45,13 +46,21 @@ const dashboard = (props:any) => {
             })
     }, []);
 
+    useEffect(() => {
+        if(searchTerm.length > 0) {
+            const products = props.data.filter((product: Product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
+            setFilterProduct(products);
+        } else {
+            setFilterProduct(props.data)
+        }
+    }, [searchTerm])
+
     if(isLoading) {
         return <p>Loading...</p>
     }
 
     const handleFilter = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(category)
         const products = props.data.filter((product: Product) => {
             const PriceInRange = Number(product.price) >= price.min && Number(product.price) <= price.max;
             const colorMatched = color === '' || product.color === color;
@@ -66,7 +75,6 @@ const dashboard = (props:any) => {
                 categoryMatch
             )
         })
-        console.log(products)
         setFilterProduct(products);
     }
     return (
@@ -86,12 +94,13 @@ const dashboard = (props:any) => {
                 condition={condition}
                 setCondition={setCondition}
                 handleFilter={handleFilter}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
             />
             <section className={styles.dashboard}>
                 {
-                    filterProducts.length > 0 ? <ProductList data={filterProducts}/> : <Text>No products found.</Text>
+                    filterProducts.length > 0 ? <ProductList data={filterProducts}/> : <Text fontSize="lg" fontWeight={500} mt={8} textAlign={"center"}>No products found</Text>
                 }
-                
             </section>      
         </>
     )

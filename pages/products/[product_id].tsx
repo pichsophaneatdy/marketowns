@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React from 'react'
-
+import {FiArrowLeft} from "react-icons/fi";
 import {
     Box,
     chakra,
@@ -19,9 +19,13 @@ import {
     List,
     ListItem,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router';
 import { MdLocalShipping } from 'react-icons/md'
 const Product_Page = (props: any) => {
     const product = props.data;
+
+    const router = useRouter();
+
     console.log(product)
     return (
         (
@@ -30,16 +34,17 @@ const Product_Page = (props: any) => {
                     columns={{ base: 1, lg: 2 }}
                     spacing={{ base: 8, md: 10 }}
                     py={{ base: 18, md: 24 }}>
-                    <Flex>
-                    <Image
-                        rounded={'md'}
-                        alt={'product image'}
-                        src={product.images[0]}
-                        fit={'cover'}
-                        align={'center'}
-                        w={'100%'}
-                        h={{ base: '100%', sm: '400px', lg: '500px' }}
-                    />
+                    <Flex flexDirection={"column"} alignItems={"start"}>
+                        <Button onClick={()=>router.back()} leftIcon={<FiArrowLeft />} mb={4} bgColor="transparent">Go back</Button>
+                        <Image
+                            rounded={'md'}
+                            alt={'product image'}
+                            src={product.images[0]}
+                            fit={'cover'}
+                            align={'center'}
+                            w={'100%'}
+                            h={{ base: '100%', sm: '400px', lg: '500px' }}
+                        />
                     </Flex>
                     <Stack spacing={{ base: 6, md: 10 }}>
                     <Box as={'header'}>
