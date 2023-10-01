@@ -40,7 +40,7 @@ const ProductForm = () => {
             const newProduct = {
                 product_id: uuidv4(),
                 seller_id: currentUser.username,
-                category_id: category,
+                category_id: category+1,
                 color: color,
                 condition: condition,
                 date: new Date().getTime(),

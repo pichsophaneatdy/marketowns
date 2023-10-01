@@ -16,6 +16,8 @@ import {
     FormControl,
     Select
 } from '@chakra-ui/react'
+// Component
+import FilterSlider from '../Slider/Slider';
 // Data
 import { categories } from '@/data/productData';
 import { sizes } from '@/data/productData';
@@ -24,8 +26,8 @@ import { productConditions } from '@/data/productData';
 
 
 interface FilterProps {
-    price: number
-    setPrice: (value: number) => void
+    price: {min: number, max: number}
+    setPrice: (value: any) => void
     category: number
     setCategory: (value: number) => void
     size: string
@@ -34,7 +36,7 @@ interface FilterProps {
     setColor: (value: string) => void
     condition: string
     setCondition: (value: string) => void
-    handleFilter: () => void
+    handleFilter: (e: React.FormEvent) => void
 }
 const Filter: React.FC<FilterProps> = ({price, setPrice, category, setCategory, size, setSize, color, setColor, condition, setCondition, handleFilter}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -61,20 +63,26 @@ const Filter: React.FC<FilterProps> = ({price, setPrice, category, setCategory, 
                     <Stack spacing={4}>
                         <FormControl>
                             <FormLabel>Price</FormLabel>
-                            <Select value={price} onChange={(e) => setPrice(Number(e.target.value))} placeholder='Select price range'>
-                                <option value={1}>0 - $25</option>
-                                <option value={2}>$25 - $50</option>
-                                <option value={3}>$50 - $75</option>
-                                <option value={4}>$75 - $100</option>
-                                <option value={5}>$100+</option>  
-                            </Select>
+                            <Flex gap="1rem">
+                                <Input 
+                                    value={price.min} 
+                                    onChange={(e) => setPrice({min: Number(e.target.value), max: price.max})} 
+                                    type="number" 
+                                    placeholder='Min' 
+                                />
+                                <Input 
+                                    value={price.max} 
+                                    onChange={(e) => setPrice({min: price.min, max: Number(e.target.value)})}
+                                    type="number" 
+                                    placeholder='Max' />
+                            </Flex>
                         </FormControl>
                         <FormControl>
                             <FormLabel>Category</FormLabel>
                             <Select value={category} onChange={(e) => setCategory(Number(e.target.value))} placeholder='Select category'>
                                 {
                                     categories.map((category: string, index: number) => {
-                                        return <option key={index} value={index}>{category}</option>
+                                        return <option key={index} value={index+1}>{category}</option>
                                     })
                                 }
                             </Select>
