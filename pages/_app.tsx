@@ -9,6 +9,8 @@ import { useRouter } from 'next/router';
 import LoggedOutHeader from '@/component/LoggedOutHeader/LoggedOutHeader';
 import LoggedInHeader from '@/component/LoggedInHeader/LoggedInHeader';
 
+import HydrationZustand from '@/component/HydrationZustard/HydrationZustard';
+
 const inter = Inter({subsets: ['latin']});
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -28,10 +30,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return ( 
     <ChakraProvider>
-        <main className={`${inter.className}`}>
-          {isLoggedIn && (router.pathname !== "/")  ? <LoggedInHeader /> : <LoggedOutHeader />}
-          <Component {...pageProps} />
-        </main>
+        <HydrationZustand>
+          <main className={`${inter.className}`}>
+            {isLoggedIn && (router.pathname !== "/")  ? <LoggedInHeader /> : <LoggedOutHeader />}
+            <Component {...pageProps} />
+          </main>
+        </HydrationZustand>
     </ChakraProvider>
     )
 }
