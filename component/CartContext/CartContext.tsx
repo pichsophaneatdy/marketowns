@@ -1,6 +1,6 @@
-import React, {useState, ReactNode, useContext} from 'react'
-import { CartContext } from '@/context/CartContext'
+import React, {useState, ReactNode, createContext, useContext} from 'react'
 
+// Product Interface
 interface Product {
     category_id: number;
     color: string;
@@ -15,10 +15,27 @@ interface Product {
     size: string;
 }
 
+// Define the cart context interface
+interface CartContextType {
+    cart: Product[];
+    addToCart: (product: Product) => void;
+    removeFromCart: (productId: string) => void;
+    clearCart: () => void;
+}
+// Create card context
+export const CartContext = createContext<CartContextType>({
+    cart: [],
+    addToCart: () => {},
+    removeFromCart: () => {},
+    clearCart: () => {}
+});
+
+
 interface CartProviderProps {
     children: ReactNode;
 }
 
+// Provider Function
 export const CartProvider = ({ children }: CartProviderProps) => {
     const [cart, setCart] = useState<Product[]>([]);
 

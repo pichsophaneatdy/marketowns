@@ -21,12 +21,17 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
 import { MdLocalShipping } from 'react-icons/md'
+// Add to to cart
+import useCartState from '@/context/cartContext';
+
 const Product_Page = (props: any) => {
     const product = props.data;
 
     const router = useRouter();
 
-    console.log(product)
+    // Add to cart
+    const addToCart = useCartState((state) => state.addToCart)
+    
     return (
         (
             <Container maxW={'7xl'} pb={{ base: 18, md: 24 }} pt={{base: 8, md: 10, lg: 14}}>
@@ -116,7 +121,11 @@ const Product_Page = (props: any) => {
                         _hover={{
                         transform: 'translateY(2px)',
                         boxShadow: 'lg',
-                        }}>
+                        }}
+                        onClick={() => {
+                            addToCart(product)
+                        }}
+                    >
                         Add to cart
                     </Button>
             

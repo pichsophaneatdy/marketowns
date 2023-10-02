@@ -251,7 +251,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
     },
     {
         label: 'Your Cart',
-        href: '#',
+        href: '/cart',
     },
     {
         label: 'Setting',
