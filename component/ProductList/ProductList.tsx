@@ -1,20 +1,9 @@
 import React from 'react'
 import ProductCard from '../ProductCard/ProductCard'
 import { Flex } from '@chakra-ui/react'
+// Interface
+import { Product } from '@/interface/product'
 
-interface Product {
-    category_id: number,
-    color: string, 
-    condition: string, 
-    date: string, 
-    desc: string, 
-    images: string[],
-    name: string, 
-    price: string, 
-    product_id: string, 
-    seller_id: string, 
-    size: string
-}
 interface ProductListProp {
     data: Product[]
 }

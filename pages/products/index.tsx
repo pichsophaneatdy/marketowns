@@ -9,20 +9,8 @@ import { categories } from '@/data/productData';
 // Components
 import Filter from '@/component/Filter/Filter';
 import ProductList from '@/component/ProductList/ProductList';
-
-interface Product {
-    category_id: number,
-    color: string, 
-    condition: string, 
-    date: string, 
-    desc: string, 
-    images: string[],
-    name: string, 
-    price: string, 
-    product_id: string, 
-    seller_id: string, 
-    size: string
-}
+// Interface
+import { Product } from '@/interface/product';
 
 const dashboard = (props:any) => {
     const [isLoading, setIsLoading] = useState(true);

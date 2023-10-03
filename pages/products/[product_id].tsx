@@ -22,8 +22,7 @@ import {
 import { useRouter } from 'next/router';
 import { MdLocalShipping } from 'react-icons/md'
 // Add to to cart
-import useCartState from '@/context/cartContext';
-
+import useCartState from '@/context/CartContext';
 const Product_Page = (props: any) => {
     const product = props.data;
 
