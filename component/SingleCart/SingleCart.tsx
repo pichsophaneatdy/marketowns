@@ -1,8 +1,12 @@
-import React from 'react'
-import { Card, Flex, Heading, CardBody, Image, Text } from '@chakra-ui/react'
-import { Product, CartProduct } from '@/interface/product'
+import React, {useEffect} from 'react'
+import { Card, Flex, Heading, CardBody, Image, Text, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, VStack } from '@chakra-ui/react'
+import useCartState from '@/context/CartContext'
 
 const SingleCart = ({product}: any)=> {
+    const {cart, addToCart, removeFromCart, decreaseQuantity} = useCartState();
+    useEffect(() => {
+        console.log(cart)
+    }, [cart])
     return (
         <Card
             direction={{base: "row"}}
@@ -19,15 +23,28 @@ const SingleCart = ({product}: any)=> {
                 src={product?.images?.[0]}
                 alt={product.name}
             />
-
-            <Flex flexDirection={"column"}>
+            <Flex w="full" flexDirection={"column"}>
                 <CardBody>
-                    <Heading size={{base: "xs"}}>{product.name}</Heading>
-                    <Text fontSize={{base: "0.8rem"}}>
-                        {product.color}, {product.size}
-                    </Text>
+                    <Flex justifyContent={'space-between'} alignItems={'start'}>
+                        <Flex flexDirection={'column'}>
+                            <Heading size={{base: "xs"}}>{product.name}</Heading>
+                            <Text fontSize={{base: "0.8rem"}}>
+                                {product.color}, {product.size}
+                            </Text>
+                        </Flex>
+                        <NumberInput size='sm' maxW={20} defaultValue={product.quantity} min={1}>
+                            <NumberInputField />
+                            <NumberInputStepper>
+                            <NumberIncrementStepper onClick={()=>addToCart(product)} />
+                            <NumberDecrementStepper onClick={()=>decreaseQuantity(product.product_id)} />
+                            </NumberInputStepper>
+                        </NumberInput>
+                    </Flex>
                     <Text fontWeight={"500"} mt={4} fontSize={{base: "0.9rem"}}>
-                        {product.quantity} × ${product.price} = ${product.quantity * product.price }
+                        × ${product.price} = ${product.quantity * product.price }
+                    </Text>
+                    <Text onClick={()=>removeFromCart(product.product_id)} cursor={"pointer"} _hover={{color: "red.200", transition: "0.5s"}} color="red" fontWeight={"500"} textAlign={"right"} fontSize={{base: "0.8rem"}}>
+                        Remove
                     </Text>
                 </CardBody>
             </Flex>

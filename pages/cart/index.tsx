@@ -34,7 +34,7 @@ const CartPage = () => {
     }
   }, [groupCart])
   return (
-    <Flex flexDirection={{base: 'column', md: "row"}} py={{base: 6, md:8}} px={{base: 4, md: "5%", lg: "10%"}} >
+    <Flex gap={{md: "2rem"}} flexDirection={{base: 'column', md: "row"}} py={{base: 6, md:8}} px={{base: 4, md: "5%", lg: "10%"}} >
         <Flex flexDirection={'column'} gap={6} flexGrow={1}>
           {groupCart.length > 0 && groupCart.map((product) => <SingleCart product={product} key={product.product_id} />)}
         </Flex>
