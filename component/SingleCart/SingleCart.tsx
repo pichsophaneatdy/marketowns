@@ -27,7 +27,7 @@ const SingleCart = ({product}: any)=> {
                         {product.color}, {product.size}
                     </Text>
                     <Text fontWeight={"500"} mt={4} fontSize={{base: "0.9rem"}}>
-                        {product.quantity} × {product.price}
+                        {product.quantity} × ${product.price} = ${product.quantity * product.price }
                     </Text>
                 </CardBody>
             </Flex>
