@@ -32,15 +32,15 @@ const CartPage = () => {
       })
       setTotal(total)
     }
-  }, [groupCart])
+  }, [cart, groupCart])
   return (
     <Flex gap={{md: "2rem"}} flexDirection={{base: 'column', md: "row"}} py={{base: 6, md:8}} px={{base: 4, md: "5%", lg: "10%"}} >
         <Flex flexDirection={'column'} gap={6} flexGrow={1}>
-          {groupCart.length > 0 && groupCart.map((product) => <SingleCart product={product} key={product.product_id} />)}
+          {groupCart.length > 0 ? groupCart.map((product) => <SingleCart product={product} key={product.product_id} />) : <Text>No item in your cart right now.</Text>}
         </Flex>
         <Flex mt={{base: 10,md: 0}} flexDirection={'column'} w={{md: "40%"}}>
-          <Text fontWeight={600} fontSize={"2xl"}>Total: {total} </Text>
-          <Button mt={10} onClick={()=>clearCart()} >Clear cart</Button>
+          <Text fontWeight={600} fontSize={"2xl"}>Total: ${total} </Text>
+          <Button mt={4} onClick={()=>clearCart()} >Clear cart</Button>
         </Flex>
     </Flex>
     

@@ -1,8 +1,22 @@
-import React, {useEffect} from 'react'
-import { Card, Flex, Heading, CardBody, Image, Text, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, VStack } from '@chakra-ui/react'
+import React, {useEffect, useState} from 'react'
+import {Card, Flex, Heading, CardBody, Image, Text, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, VStack } from '@chakra-ui/react'
 import useCartState from '@/context/CartContext'
 
 const SingleCart = ({product}: any)=> {
+
+    const [image, setImage] = useState<number>(0);
+
+    const handleNextImg = () => {
+        if(image < 2) {
+            setImage(image+1)
+        }
+    }
+    const handlePrevImg = () => {
+        if(image > 0) {
+            setImage(image-1)
+        }
+    }
+
     const {cart, addToCart, removeFromCart, decreaseQuantity} = useCartState();
     useEffect(() => {
         console.log(cart)

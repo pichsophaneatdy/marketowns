@@ -1,6 +1,6 @@
 import axios from 'axios'
-import React from 'react'
-import {FiArrowLeft} from "react-icons/fi";
+import React, { useEffect } from 'react'
+import {FiArrowLeft, FiArrowRight} from "react-icons/fi";
 import {
     Box,
     chakra,
@@ -21,6 +21,7 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
 import { MdLocalShipping } from 'react-icons/md'
+import { useState } from 'react';
 // Add to to cart
 import useCartState from '@/context/CartContext';
 const Product_Page = (props: any) => {
@@ -28,6 +29,21 @@ const Product_Page = (props: any) => {
 
     const router = useRouter();
 
+    const [image, setImage] = useState<number>(0);
+
+    const handleNextImg = () => {
+        if(image < 2) {
+            setImage(image+1)
+        }
+    }
+    const handlePrevImg = () => {
+        if(image > 0) {
+            setImage(image-1)
+        }
+    }
+    useEffect(() => {
+        console.log(image)
+    }, [image])
     // Add to cart
     const addToCart = useCartState((state) => state.addToCart)
     
@@ -39,17 +55,44 @@ const Product_Page = (props: any) => {
                     columns={{ base: 1, lg: 2 }}
                     spacing={{ base: 8, md: 10 }}
                 >
-                    <Flex flexDirection={"column"} alignItems={"start"}>
+                    <Box position={"relative"} flexDirection={"column"} alignItems={"start"}>
                         <Image
                             rounded={'md'}
                             alt={'product image'}
-                            src={product.images[0]}
+                            src={product.images[image]}
                             fit={'cover'}
                             align={'center'}
                             w={'100%'}
                             h={{ base: '100%', sm: '400px', lg: '500px' }}
                         />
-                    </Flex>
+                        <Box
+                            position="absolute"
+                            top="50%"
+                            left="5%"
+                            transform="translate(-50%, -50%)"
+                            bgColor="white" // Customize the background color as needed
+                            p="2"
+                            borderRadius="50%"
+                            onClick={handlePrevImg}
+                            cursor={"pointer"}
+                        >
+                            <FiArrowLeft size="15px" position={"absolute"} top={0} />
+                        </Box>
+                        <Box
+                            position="absolute"
+                            top="50%"
+                            right="0%"
+                            transform="translate(-50%, -50%)"
+                            bgColor="white" // Customize the background color as needed
+                            p="2"
+                            borderRadius="50%"
+                            onClick={handleNextImg}
+                            cursor={"pointer"}
+                        >
+                            <FiArrowRight size="15px" position={"absolute"} top={0} />
+                        </Box>
+                        
+                    </Box>
                     <Stack spacing={{ base: 6, md: 10 }}>
                     <Box as={'header'}>
                         <Heading
