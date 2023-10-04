@@ -3,7 +3,6 @@ import { Card, Flex, Heading, CardBody, Image, Text } from '@chakra-ui/react'
 import { Product, CartProduct } from '@/interface/product'
 
 const SingleCart = ({product}: any)=> {
-    console.log(product)
     return (
         <Card
             direction={{base: "row"}}
