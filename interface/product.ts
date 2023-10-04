@@ -1,4 +1,5 @@
 export interface Product {
+    quantity?: number;
     category_id: number,
     color: string, 
     condition: string, 
@@ -9,5 +10,8 @@ export interface Product {
     price: string, 
     product_id: string, 
     seller_id: string, 
-    size: string
+    size: string,
+}
+export interface CartProduct extends Product {
+    quantity?: number
 }

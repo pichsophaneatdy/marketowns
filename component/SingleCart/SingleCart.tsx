@@ -1,35 +1,37 @@
 import React from 'react'
-import { Card, Heading, CardBody, CardFooter, Button, Image, Stack, Text } from '@chakra-ui/react'
+import { Card, Flex, Heading, CardBody, Image, Text } from '@chakra-ui/react'
+import { Product, CartProduct } from '@/interface/product'
 
-const SingleCart = () => {
+const SingleCart = ({product}: any)=> {
+    console.log(product)
     return (
         <Card
             direction={{base: "row"}}
             overflow='hidden'
             variant='outline'
             border="none"
+            height={{base: "120px"}}
             >
             <Image
                 borderRadius={6}
                 objectFit='cover'
-                maxW={{ base: '30%', sm: '25%' }}
-                src='https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60'
-                alt='Caffe Latte'
+                maxWidth={{base: '121px'}}
+                minWidth={{ base: '120px'}}
+                src={product?.images?.[0]}
+                alt={product.name}
             />
 
-            <Stack>
+            <Flex flexDirection={"column"}>
                 <CardBody>
-                <Heading size='sm'>The perfect latte</Heading>
-
-                <Text>
-                    Caffè latte
-                </Text>
-
-                <Button size="xs"  variant='solid' colorScheme='blue'>
-                    Buy Latte
-                </Button>
+                    <Heading size={{base: "xs"}}>{product.name}</Heading>
+                    <Text fontSize={{base: "0.8rem"}}>
+                        {product.color}, {product.size}
+                    </Text>
+                    <Text fontWeight={"500"} mt={4} fontSize={{base: "0.9rem"}}>
+                        {product.quantity} × {product.price}
+                    </Text>
                 </CardBody>
-            </Stack>
+            </Flex>
         </Card>
     )
 }
