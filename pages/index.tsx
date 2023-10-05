@@ -16,7 +16,6 @@ import {
 } from '@chakra-ui/react'
 
 export default function Home(props: any) {
-  console.log(props.data)
   return (
     <>
       <Head>
@@ -51,6 +50,8 @@ export default function Home(props: any) {
             alignSelf={'center'}
             position={'relative'}>
             <Button
+              as="a"
+              href="/register-page"
               colorScheme={'green'}
               bg={'green.400'}
               rounded={'full'}
@@ -66,12 +67,6 @@ export default function Home(props: any) {
       </main>
     </>
   )
-}
-export async function getServerSideProps() {
-  const response = await axios.get("https://iqkyzfpq17.execute-api.us-east-1.amazonaws.com/dev/product");
-  return {
-    props: {data: response.data}
-  }
 }
 
 const Arrow = createIcon({

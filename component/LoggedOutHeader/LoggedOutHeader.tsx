@@ -37,7 +37,7 @@ export default function LoggedOutHeader() {
                 color={useColorModeValue('gray.600', 'white')}
                 minH={'60px'}
                 py={{ base: 2 }}
-                px={{ base: 4 }}
+                px={{ base: 4, md: "5%", xl: "10%" }}
                 borderBottom={1}
                 borderStyle={'solid'}
                 borderColor={useColorModeValue('gray.200', 'gray.900')}
@@ -186,6 +186,7 @@ return (
     {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
     ))}
+    <Button as="a" href="/login-page" mt={4} w="150px" colorScheme='green'>Log In</Button>
     </Stack>
 )
 }
@@ -247,8 +248,8 @@ href?: string
 
 const NAV_ITEMS: Array<NavItem> = [
 {
-    label: 'All Products',
-    href: '#',
+    label: 'Saving Tips',
+    href: '/saving',
 },
 {
     label: 'About Us',
