@@ -51,7 +51,7 @@ const ProductForm = () => {
                 size: size
             }
             console.log(newProduct)
-            await axios.post("https://iqkyzfpq17.execute-api.us-east-1.amazonaws.com/dev/product", newProduct, {
+            await axios.post(process.env.NEXT_PUBLIC_API_1!, newProduct, {
                 headers: {
                     Authorization: currentUser.idToken
                 }

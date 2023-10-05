@@ -11,8 +11,9 @@ import {
 } from "@chakra-ui/react";
 import styles from "./register-page.module.scss";
 import { useRouter } from "next/router";
+import axios from "axios";
 // AWS functions
-import { getCurrentUser, registerUser, verifyUser } from "@/aws/awsCognito";
+import { getCurrentUser, registerUser, verifyUser } from "@/configuration/awsCognito";
 
 const RegisterPage = () => {
     const router = useRouter();
@@ -24,6 +25,7 @@ const RegisterPage = () => {
     const [confirmPwd, setConfirmPwd] = useState<string>("");
     const [show1, setShow1] = useState<boolean>(false);
     const [show2, setShow2] = useState<boolean>(false);
+    // Submitting state
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isLoading2, setIsLoading2] = useState<boolean>(false);
     const [usernameAWS, setUsernameAWS] = useState<string>("");
@@ -93,6 +95,7 @@ const RegisterPage = () => {
                 
             })
     }, [])
+    
     return (
         <section className={styles.register}>
             {
@@ -172,6 +175,10 @@ const RegisterPage = () => {
                                     </Button>
                                 )
                             }
+                            <Text fontSize={"sm"} textAlign={"center"}>
+                                Already have an account?
+                                <Text ml="0.2rem" as="a" href="/login-page" fontWeight={600} textDecoration={"underline"}>Login</Text>
+                            </Text>
                         </Stack>
                     </form>
                     </>

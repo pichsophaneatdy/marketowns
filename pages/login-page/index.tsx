@@ -10,9 +10,9 @@ import {
     Button,
     Text
 } from "@chakra-ui/react";
-import { loginUser } from '@/aws/awsCognito';
+import { loginUser } from '@/configuration/awsCognito';
 import { useRouter } from 'next/router';
-import { getCurrentUser } from '@/aws/awsCognito';
+import { getCurrentUser } from '@/configuration/awsCognito';
 
 const LoginPage = () => {
 
@@ -92,6 +92,10 @@ const LoginPage = () => {
                             </Button>
                         )
                     }
+                    <Text fontSize={"sm"} textAlign={"center"}>
+                        Do not have an account?
+                        <Text ml="0.2rem" as="a" href="/register-page" fontWeight={600} textDecoration={"underline"}>Sign Up</Text>
+                    </Text>
                 </Stack>
             </form>
         </section>

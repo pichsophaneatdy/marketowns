@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getCurrentUser } from '@/aws/awsCognito';
+import { getCurrentUser } from '@/functions/awsCognito';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import styles from "./dashboard.module.scss";
@@ -95,7 +95,7 @@ const dashboard = (props:any) => {
 }
 
 export async function getServerSideProps() {
-    const response = await axios.get("https://iqkyzfpq17.execute-api.us-east-1.amazonaws.com/dev/product/all");
+    const response = await axios.get("https://iqkyzfpq17.execute-api.us-east-1.amazonaws.com/dev/product/all")
     return {
         props: {data: response.data}
     }

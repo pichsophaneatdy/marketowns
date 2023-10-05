@@ -2,7 +2,7 @@ import '@/styles/globals.scss';
 import type { AppProps } from 'next/app';
 import {Inter} from "next/font/google";
 import { ChakraProvider } from '@chakra-ui/react';
-import { getCurrentUser } from '@/aws/awsCognito';
+import { getCurrentUser } from '@/configuration/awsCognito';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 // Headers

@@ -17,7 +17,7 @@ import {
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon} from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
 // AWS Sign out function
-import { logout } from '@/aws/awsCognito';
+import { logout } from '@/configuration/awsCognito';
 
 export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure()
