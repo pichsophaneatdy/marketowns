@@ -234,27 +234,27 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
             </Stack>
         </Collapse>
         </Stack>
-    )
-    }
+)
+}
 
-    interface NavItem {
-    label: string
-    subLabel?: string
-    children?: Array<NavItem>
-    href?: string
-    }
+interface NavItem {
+label: string
+subLabel?: string
+children?: Array<NavItem>
+href?: string
+}
 
-    const NAV_ITEMS: Array<NavItem> = [
-    {
-        label: 'All Products',
-        href: "/products"
-    },
-    {
-        label: 'Your Cart',
-        href: '/cart',
-    },
-    {
-        label: 'Setting',
-        href: '#',
-    },
+const NAV_ITEMS: Array<NavItem> = [
+{
+    label: 'All Products',
+    href: "/products"
+},
+{
+    label: 'Your Cart',
+    href: '/cart',
+},
+{
+    label: 'Your Listing',
+    href: '/listing',
+},
 ]

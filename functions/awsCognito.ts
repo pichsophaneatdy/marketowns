@@ -111,7 +111,5 @@ export const getUsername = async(): Promise<string> => {
         } else {
             reject({message: "User not found or not authenticated."})
         }
-            
-        
     })
 }

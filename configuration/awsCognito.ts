@@ -78,7 +78,7 @@ export const loginUser = async(username: string, password: string) => {
     })
 }
 
-export const getCurrentUser = async() => {
+export const getCurrentUser = async(): Promise<{username:string}> => {
     return new Promise((resolve, reject) => {
         const cognitorUser = userPool.getCurrentUser();
         if(cognitorUser != null) {

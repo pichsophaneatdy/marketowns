@@ -16,11 +16,12 @@ const inter = Inter({subsets: ['latin']});
 export default function App({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
-
+  const [username, setUsername] = useState<string>("")
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     getCurrentUser()
-      .then(() => {
+      .then((response) => {
+        setUsername(response.username);
         setIsLoggedIn(true);
       })
       .catch(() => {
