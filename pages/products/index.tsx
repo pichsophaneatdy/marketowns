@@ -95,7 +95,7 @@ const dashboard = (props:any) => {
 }
 
 export async function getServerSideProps() {
-    const response = await axios.get("https://iqkyzfpq17.execute-api.us-east-1.amazonaws.com/dev/product/all")
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_1}/all`)
     return {
         props: {data: response.data}
     }

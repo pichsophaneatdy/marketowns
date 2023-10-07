@@ -184,7 +184,7 @@ const Product_Page = (props: any) => {
 export async function getServerSideProps(context: any) {
     try {
         const {product_id} = context.query; 
-        const product = await axios.get(`https://iqkyzfpq17.execute-api.us-east-1.amazonaws.com/dev/product/single?product_id=${product_id}`);
+        const product = await axios.get(`${process.env.NEXT_PUBLIC_API_1}/single?product_id=${product_id}`);
         return {
             props: {
                 data: product.data
