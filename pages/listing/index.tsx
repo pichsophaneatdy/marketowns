@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import { Product } from '@/interface/product';
 import { getCurrentUser } from '@/configuration/awsCognito';
-import { CircularProgress, Flex, Text } from '@chakra-ui/react';
+import { CircularProgress, Flex, Text,  Table, Thead, Tbody,Tfoot,Tr,Th,Td, TableContainer, } from '@chakra-ui/react';
+
 const getProduct = async() => {
     const user = await getCurrentUser();
     try {
@@ -43,13 +44,48 @@ const listing = (props: any) => {
     return (
         <Flex>
             {
-                products.length > 0 ? (
+                products.length === 0 ? (
                     <Flex>
                         <Text>You have no listing on Marketowns.</Text>
                     </Flex>
                 ) : (
-                    <Flex>
-                    </Flex>
+                    // Render the listing products in a table
+                    <TableContainer w="100%" my={{base: 6, lg: 16}} px={{base: 0, md: 4, lg: "8%"}}>
+                        <Text mb={{base: 4, lg: 10}} fontSize={"lg"} fontWeight={500} px={6}>Your Listing</Text>
+                        <Table variant='simple'>
+                            <Thead>
+                                <Tr>
+                                    <Th>Product Name</Th>
+                                    <Th>Listing Date</Th>
+                                    <Th isNumeric>Price</Th>
+                                    <Th>Sold</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                {
+                                    products.map((product) => {
+                                        let date = new Date(Number(product.date))
+                                        return (
+                                            <Tr>
+                                                <Td>{product.name}</Td>
+                                                <Td>{date.getMonth()}-{date.getFullYear()}-{date.getDate()}</Td>
+                                                <Td isNumeric>{product.price}</Td>
+                                                <Td>No</Td>
+                                        </Tr>
+                                        )
+                                    })
+                                }
+                            </Tbody>
+                            <Tfoot>
+                                <Tr>
+                                    <Th>Total</Th>
+                                    <Th></Th>
+                                    <Th></Th>
+                                    <Th>{products.length}</Th>
+                                </Tr>
+                            </Tfoot>
+                        </Table>
+                    </TableContainer>
                 )
             }
         </Flex>
