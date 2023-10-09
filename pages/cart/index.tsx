@@ -40,7 +40,10 @@ const CartPage = () => {
         </Flex>
         <Flex mt={{base: 10,md: 0}} flexDirection={'column'} w={{md: "40%"}}>
           <Text fontWeight={600} fontSize={"2xl"}>Total: ${total} </Text>
-          <Button mt={4} onClick={()=>clearCart()} >Clear cart</Button>
+          <Flex gap={4}>
+            <Button w="full" mt={4} onClick={()=>clearCart()} >Clear cart</Button>
+            <Button w="full" mt={4} colorScheme='green' onClick={()=>clearCart()} >Checkout</Button>
+          </Flex>
         </Flex>
     </Flex>
     

@@ -18,6 +18,7 @@ import {
     VisuallyHidden,
     List,
     ListItem,
+    useToast
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
 import { MdLocalShipping } from 'react-icons/md'
@@ -30,6 +31,8 @@ const Product_Page = (props: any) => {
     const router = useRouter();
 
     const [image, setImage] = useState<number>(0);
+
+    const toast = useToast()
 
     const handleNextImg = () => {
         if(image < 2) {
@@ -150,7 +153,6 @@ const Product_Page = (props: any) => {
                         </List>
                         </Box>
                     </Stack>
-            
                     <Button
                         rounded={'none'}
                         w={'full'}
@@ -165,7 +167,15 @@ const Product_Page = (props: any) => {
                         boxShadow: 'lg',
                         }}
                         onClick={() => {
-                            addToCart(product)
+                            addToCart(product);
+                            toast({
+                                title: 'Added to cart',
+                                description: `${product.name} is added to your cart.`,
+                                status: 'success',
+                                duration: 9000,
+                                isClosable: true,
+                                position: "top"
+                            })
                         }}
                     >
                         Add to cart
