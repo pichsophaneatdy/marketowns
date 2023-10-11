@@ -27,7 +27,7 @@ const SingleCart = ({product}: any)=> {
             overflow='hidden'
             variant='outline'
             border="none"
-            height={{base: "120px"}}
+            height={{base: "130px"}}
             >
             <Image
                 borderRadius={6}
@@ -39,27 +39,29 @@ const SingleCart = ({product}: any)=> {
             />
             <Flex w="full" flexDirection={"column"}>
                 <CardBody>
-                    <Flex justifyContent={'space-between'} alignItems={'start'}>
+                    <Flex flexDirection={{base: "column", sm: "row"}} justifyContent={'space-between'} alignItems={{base: "start", sm: 'center'}}>
                         <Flex flexDirection={'column'}>
                             <Heading size={{base: "xs"}}>{product.name}</Heading>
                             <Text fontSize={{base: "0.8rem"}}>
                                 {product.color}, {product.size}
                             </Text>
                         </Flex>
-                        <NumberInput size='sm' maxW={20} defaultValue={product.quantity} min={1}>
+                        <Flex mt={{base: 2, sm: 0}} flexDirection={"column"}>
+                            <Text fontWeight={"500"} fontSize={{base: "0.9rem"}}>
+                                $ {product.price}
+                            </Text>
+                            <Text onClick={()=>removeFromCart(product.product_id)} cursor={"pointer"} _hover={{color: "red.200", transition: "0.5s"}} color="red" fontWeight={"500"} fontSize={{base: "0.8rem"}}>
+                                Remove
+                            </Text>
+                        </Flex>
+                        {/* <NumberInput size='sm' maxW={20} defaultValue={product.quantity} min={1}>
                             <NumberInputField />
                             <NumberInputStepper>
                             <NumberIncrementStepper onClick={()=>addToCart(product)} />
                             <NumberDecrementStepper onClick={()=>decreaseQuantity(product.product_id)} />
                             </NumberInputStepper>
-                        </NumberInput>
+                        </NumberInput> */}
                     </Flex>
-                    <Text fontWeight={"500"} mt={4} fontSize={{base: "0.9rem"}}>
-                        × ${product.price} = ${product.quantity * product.price }
-                    </Text>
-                    <Text onClick={()=>removeFromCart(product.product_id)} cursor={"pointer"} _hover={{color: "red.200", transition: "0.5s"}} color="red" fontWeight={"500"} textAlign={"right"} fontSize={{base: "0.8rem"}}>
-                        Remove
-                    </Text>
                 </CardBody>
             </Flex>
         </Card>
