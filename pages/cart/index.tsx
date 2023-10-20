@@ -7,8 +7,7 @@ import { Product, CartProduct } from '@/interface/product';
 import Checkout from '@/component/Checkout/Checkout';
 
 const CartPage = () => {
-  const [total, setTotal] = useState<number>(0);
-
+  const [Subtotal, setSubtotal] = useState<number>(0)
   const {cart, clearCart} = useCartState();
   const productIds: string[] = []
   const groupCart: CartProduct[] = []
@@ -25,23 +24,27 @@ const CartPage = () => {
       groupCart.push(product)
     }
   })
-  // Calculate total
+  // Calculate Sub total
   useEffect(() => {
     if(groupCart.length > 0) {
-      let total = 0;
+      let Subtotal = 0;
       groupCart.map((product) => {
-        total += (product.quantity || 1) * Number(product.price)
+        Subtotal += (product.quantity || 1) * Number(product.price)
       })
-      setTotal(total)
+      setSubtotal(Subtotal)
     }
   }, [cart, groupCart])
   return (
-    <Flex gap={{md: "2rem"}} flexDirection={{base: 'column', lg: "row"}} py={{base: 6, md:8}} px={{base: 4, md: "5%", lg: "10%"}} >
-        <Flex flexDirection={"column"} width={{lg: "55%"}}>
-          <Flex flexDirection={'column'} flexGrow={1} gap={6}>
+    <Flex alignItems={"start"} bg={"gray.50"} gap={{md: "2rem"}} flexDirection={{base: 'column', lg: "row"}} py={{base: 6, md:8}} px={{base: 4, md: "5%"}} >
+        <Flex flexDirection={"column"} width={{base: "100%",xl: "60%"}}>
+          <Flex p={4} bg={"white"} flexDirection={'column'} flexGrow={1} gap={6}>
             {groupCart.length > 0 ? groupCart.map((product) => <SingleCart product={product} key={product.product_id} />) : <Text>No item in your cart right now.</Text>}
           </Flex>
-          <Text mt={{base: 6, md: 8,lg: 10}} textAlign={"right"} fontWeight={600} fontSize={"2xl"}>Total: ${total} </Text>
+          <Flex gap={2} textAlign={"right"} flexDirection="column" mt={{base: 6, md: 8,lg: 10}}>
+            <Text fontWeight={500}>Sub total: ${Subtotal} </Text>
+            <Text color="gray.600">GST(5%): ${(Subtotal*0.05).toFixed(2)}</Text>
+            <Text fontWeight={600} fontSize={"2xl"}>Total: ${(Subtotal*1.05).toFixed(2)} </Text>
+          </Flex>
           <Flex justifyContent={"end"} gap={4}>
             <Button w="200px" mt={4} onClick={()=>clearCart()} >Clear cart</Button>
           </Flex>

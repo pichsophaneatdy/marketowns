@@ -27,13 +27,14 @@ const SingleCart = ({product}: any)=> {
             overflow='hidden'
             variant='outline'
             border="none"
-            height={{base: "130px"}}
+            height={{base: "100px"}}
             >
             <Image
                 borderRadius={6}
                 objectFit='cover'
-                maxWidth={{base: '121px'}}
-                minWidth={{ base: '120px'}}
+                minWidth={{ base: '100px'}}
+                maxW={{base: "101px"}}
+                height={{base: '100px'}}
                 src={product?.images?.[0]}
                 alt={product.name}
             />
@@ -42,15 +43,15 @@ const SingleCart = ({product}: any)=> {
                     <Flex flexDirection={{base: "column", sm: "row"}} justifyContent={'space-between'} alignItems={{base: "start", sm: 'center'}}>
                         <Flex flexDirection={'column'}>
                             <Heading size={{base: "xs"}}>{product.name}</Heading>
-                            <Text fontSize={{base: "0.8rem"}}>
+                            <Text display={{base: "none", sm: "inline"}} fontSize={{base: "0.8rem"}}>
                                 {product.color}, {product.size}
                             </Text>
                         </Flex>
                         <Flex mt={{base: 2, sm: 0}} flexDirection={"column"}>
-                            <Text fontWeight={"500"} fontSize={{base: "0.9rem"}}>
+                            <Text textAlign={'right'} fontWeight={"500"} fontSize={{base: "0.9rem"}}>
                                 $ {product.price}
                             </Text>
-                            <Text onClick={()=>removeFromCart(product.product_id)} cursor={"pointer"} _hover={{color: "red.200", transition: "0.5s"}} color="red" fontWeight={"500"} fontSize={{base: "0.8rem"}}>
+                            <Text textAlign={'right'} onClick={()=>removeFromCart(product.product_id)} cursor={"pointer"} _hover={{color: "red.200", transition: "0.5s"}} color="red" fontWeight={"500"} fontSize={{base: "0.8rem"}}>
                                 Remove
                             </Text>
                         </Flex>
