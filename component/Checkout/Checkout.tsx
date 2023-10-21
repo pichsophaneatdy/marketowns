@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button,Flex, Text, Stack, FormControl, FormLabel, Input, Radio, RadioGroup, Select} from "@chakra-ui/react";
+import {Alert, AlertIcon,Button,Flex, Text, Stack, FormControl, FormLabel, Input, Radio, RadioGroup, Select} from "@chakra-ui/react";
 import countries from '@/data/countryData';
 
 interface CheckoutProps {
@@ -17,14 +17,23 @@ interface CheckoutProps {
     setCountry: (value: string) => void,
     payment: string,
     setPayment: (value: string) => void,
-    handleCheckout: (e: React.FormEvent) => void
+    handleCheckout: (e: React.FormEvent) => void,
+    error: string
 }
-function Checkout({name, setName, address, setAddress, apt, setApt, city, zipCode, setZipCode, setCity, country, setCountry, payment, setPayment, handleCheckout}: CheckoutProps) {
+function Checkout({name, setName, address, setAddress, apt, setApt, city, zipCode, setZipCode, setCity, country, setCountry, payment, setPayment, handleCheckout, error}: CheckoutProps) {
     return (
         <Flex minH={"100vh"} gap={4} flexGrow={1} borderRadius={8} mt={{base: 10,md: 0}} flexDirection={'column'} w={{base: "100%",xl: "40%"}}>
             {/* Shipping Info */}
             <Flex bgColor={"white"} borderRadius={4} padding={6} flexDirection={"column"}>
                 <Text fontSize={{base: "md"}} fontWeight={"600"}>SHIPPING INFORMATION</Text> 
+                {
+                    error && (
+                        <Alert variant='left-accent' fontSize={"sm"} my={2} borderRadius={4} status='error'>
+                            <AlertIcon />
+                            Missing required information
+                        </Alert>
+                )
+                }
                 <Stack spacing={6} my={{base: 6}}>
                     <FormControl isRequired>
                         <FormLabel fontSize="xs">FULL NAME</FormLabel>
