@@ -4,6 +4,7 @@ import SingleCart from '@/component/SingleCart/SingleCart';
 import { Flex, Text, Button} from '@chakra-ui/react';
 import { Product, CartProduct } from '@/interface/product';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 // Component
 import Checkout from '@/component/Checkout/Checkout';
 // Cognito
@@ -54,7 +55,7 @@ const CartPage = () => {
     try {
       const currentUser = await getCurrentUser();
       const productsArray = cart.map((product) => product.product_id);
-      const newProduct= {
+      const newOrder= {
         order_id: uuidv4(),
         user_id: currentUser.username,
         date: new Date().getTime(),
@@ -69,7 +70,12 @@ const CartPage = () => {
         payment: "Pay at delivery",
         products: productsArray
       }
-      console.log(newProduct)
+      const data = await axios.post(process.env.NEXT_PUBLIC_API_2!, newOrder, {
+        headers: {
+          Authorization: currentUser.idToken
+      }
+      })
+      console.log(data)
     } catch(err){
       console.log(err)
     }
