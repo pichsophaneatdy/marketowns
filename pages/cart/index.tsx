@@ -7,7 +7,17 @@ import { Product, CartProduct } from '@/interface/product';
 import Checkout from '@/component/Checkout/Checkout';
 
 const CartPage = () => {
+
+  // Checkout State
+  const [name, setName] = useState<string>("")
+  const [address, setAddress] = useState<string>("")
+  const [apt, setApt] = useState<string>("")
+  const [city, setCity] = useState<string>("")
+  const [zipCode, setZipCode] = useState<string>("")
+  const [country, setCountry] = useState<string>("")
   const [Subtotal, setSubtotal] = useState<number>(0)
+  const [payment, setPayment] = useState<string>("")
+
   const {cart, clearCart} = useCartState();
   const productIds: string[] = []
   const groupCart: CartProduct[] = []
@@ -50,7 +60,22 @@ const CartPage = () => {
           </Flex>
         </Flex>
         {/* Checkout section */}
-        <Checkout />
+        <Checkout
+          name={name}
+          setName={setName}
+          address={address}
+          setAddress={setAddress}
+          apt={apt}
+          setApt={setApt}
+          city={city}
+          setCity={setCity}
+          country={country}
+          setCountry={setCountry}
+          payment={payment}
+          setPayment={setPayment}
+          zipCode={zipCode}
+          setZipCode={setZipCode}
+        />
     </Flex>
     
   )
