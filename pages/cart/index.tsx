@@ -3,8 +3,11 @@ import useCartState from '@/context/CartContext';
 import SingleCart from '@/component/SingleCart/SingleCart';
 import { Flex, Text, Button} from '@chakra-ui/react';
 import { Product, CartProduct } from '@/interface/product';
+import { v4 as uuidv4 } from 'uuid';
 // Component
 import Checkout from '@/component/Checkout/Checkout';
+// Cognito
+import { getCurrentUser } from '@/functions/awsCognito';
 
 const CartPage = () => {
 
@@ -44,6 +47,34 @@ const CartPage = () => {
       setSubtotal(Subtotal)
     }
   }, [cart, groupCart])
+
+  // Handle Submit
+  const handleCheckout = async(e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const currentUser = await getCurrentUser();
+      const productsArray = cart.map((product) => product.product_id);
+      const newProduct= {
+        order_id: uuidv4(),
+        user_id: currentUser.username,
+        date: new Date().getTime(),
+        subtotal: Subtotal,
+        total: Subtotal*1.05,
+        fullName: name,
+        address: address,
+        apt: apt,
+        city: city,
+        zipCode: zipCode,
+        country: country,
+        payment: "Pay at delivery",
+        products: productsArray
+      }
+      console.log(newProduct)
+    } catch(err){
+      console.log(err)
+    }
+    
+  }
   return (
     <Flex alignItems={"start"} bg={"gray.50"} gap={{md: "2rem"}} flexDirection={{base: 'column', lg: "row"}} py={{base: 6, md:8}} px={{base: 4, md: "5%"}} >
         <Flex flexDirection={"column"} width={{base: "100%",xl: "60%"}}>
@@ -75,6 +106,7 @@ const CartPage = () => {
           setPayment={setPayment}
           zipCode={zipCode}
           setZipCode={setZipCode}
+          handleCheckout={handleCheckout}
         />
     </Flex>
     
