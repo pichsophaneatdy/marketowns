@@ -1,0 +1,47 @@
+"filename", "language", "TypeScript", "TypeScript JSX", "SCSS", "JSON with Comments", "Markdown", "JSON", "XML", "JavaScript", "comment", "blank", "total"
+"/Users/pichsophaneatdy/Documents/marketplace/README.md", "Markdown", 0, 0, 0, 0, 23, 0, 0, 0, 0, 16, 39
+"/Users/pichsophaneatdy/Documents/marketplace/component/Checkout/Checkout.tsx", "TypeScript JSX", 0, 116, 0, 0, 0, 0, 0, 0, 2, 2, 120
+"/Users/pichsophaneatdy/Documents/marketplace/component/Confirmation.tsx", "TypeScript JSX", 0, 26, 0, 0, 0, 0, 0, 0, 0, 1, 27
+"/Users/pichsophaneatdy/Documents/marketplace/component/Filter/Filter.tsx", "TypeScript JSX", 0, 129, 0, 0, 0, 0, 0, 0, 2, 6, 137
+"/Users/pichsophaneatdy/Documents/marketplace/component/HydrationZustard/HydrationZustard.tsx", "TypeScript JSX", 0, 12, 0, 0, 0, 0, 0, 0, 1, 4, 17
+"/Users/pichsophaneatdy/Documents/marketplace/component/LoggedInHeader/LoggedInHeader.tsx", "TypeScript JSX", 0, 243, 0, 0, 0, 0, 0, 0, 1, 16, 260
+"/Users/pichsophaneatdy/Documents/marketplace/component/LoggedOutHeader/LoggedOutHeader.tsx", "TypeScript JSX", 0, 248, 0, 0, 0, 0, 0, 0, 0, 14, 262
+"/Users/pichsophaneatdy/Documents/marketplace/component/ProductCard/ProductCard.tsx", "TypeScript JSX", 0, 38, 0, 0, 0, 0, 0, 0, 0, 8, 46
+"/Users/pichsophaneatdy/Documents/marketplace/component/ProductList/ProductList.tsx", "TypeScript JSX", 0, 27, 0, 0, 0, 0, 0, 0, 1, 3, 31
+"/Users/pichsophaneatdy/Documents/marketplace/component/SingleCart/SingleCart.tsx", "TypeScript JSX", 0, 60, 0, 0, 0, 0, 0, 0, 7, 6, 73
+"/Users/pichsophaneatdy/Documents/marketplace/component/Slider/Slider.tsx", "TypeScript JSX", 0, 46, 0, 0, 0, 0, 0, 0, 0, 2, 48
+"/Users/pichsophaneatdy/Documents/marketplace/component/Upload/Upload.module.scss", "SCSS", 0, 0, 57, 0, 0, 0, 0, 0, 1, 2, 60
+"/Users/pichsophaneatdy/Documents/marketplace/component/Upload/Upload.tsx", "TypeScript JSX", 0, 54, 0, 0, 0, 0, 0, 0, 3, 4, 61
+"/Users/pichsophaneatdy/Documents/marketplace/configuration/awsCognito.ts", "TypeScript", 93, 0, 0, 0, 0, 0, 0, 0, 0, 11, 104
+"/Users/pichsophaneatdy/Documents/marketplace/context/CartContext.ts", "TypeScript", 34, 0, 0, 0, 0, 0, 0, 0, 2, 3, 39
+"/Users/pichsophaneatdy/Documents/marketplace/data/countryData.ts", "TypeScript", 196, 0, 0, 0, 0, 0, 0, 0, 0, 2, 198
+"/Users/pichsophaneatdy/Documents/marketplace/data/productData.ts", "TypeScript", 60, 0, 0, 0, 0, 0, 0, 0, 0, 4, 64
+"/Users/pichsophaneatdy/Documents/marketplace/functions/awsCognito.ts", "TypeScript", 103, 0, 0, 0, 0, 0, 0, 0, 0, 12, 115
+"/Users/pichsophaneatdy/Documents/marketplace/functions/cloudinary.ts", "TypeScript", 18, 0, 0, 0, 0, 0, 0, 0, 0, 3, 21
+"/Users/pichsophaneatdy/Documents/marketplace/interface/product.ts", "TypeScript", 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17
+"/Users/pichsophaneatdy/Documents/marketplace/next.config.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 4, 1, 2, 7
+"/Users/pichsophaneatdy/Documents/marketplace/package-lock.json", "JSON", 0, 0, 0, 0, 0, 5766, 0, 0, 0, 1, 5767
+"/Users/pichsophaneatdy/Documents/marketplace/package.json", "JSON", 0, 0, 0, 0, 0, 41, 0, 0, 0, 1, 42
+"/Users/pichsophaneatdy/Documents/marketplace/pages/_app.tsx", "TypeScript JSX", 0, 36, 0, 0, 0, 0, 0, 0, 1, 6, 43
+"/Users/pichsophaneatdy/Documents/marketplace/pages/_document.tsx", "TypeScript JSX", 0, 12, 0, 0, 0, 0, 0, 0, 0, 2, 14
+"/Users/pichsophaneatdy/Documents/marketplace/pages/api/hello.ts", "TypeScript", 10, 0, 0, 0, 0, 0, 0, 0, 1, 3, 14
+"/Users/pichsophaneatdy/Documents/marketplace/pages/cart/index.tsx", "TypeScript JSX", 0, 217, 0, 0, 0, 0, 0, 0, 15, 8, 240
+"/Users/pichsophaneatdy/Documents/marketplace/pages/index.tsx", "TypeScript JSX", 0, 81, 0, 0, 0, 0, 0, 0, 0, 3, 84
+"/Users/pichsophaneatdy/Documents/marketplace/pages/listing/index.tsx", "TypeScript JSX", 0, 89, 0, 0, 0, 0, 0, 0, 2, 5, 96
+"/Users/pichsophaneatdy/Documents/marketplace/pages/login-page/index.tsx", "TypeScript JSX", 0, 96, 0, 0, 0, 0, 0, 0, 0, 9, 105
+"/Users/pichsophaneatdy/Documents/marketplace/pages/login-page/login-page.module.scss", "SCSS", 0, 0, 10, 0, 0, 0, 0, 0, 0, 1, 11
+"/Users/pichsophaneatdy/Documents/marketplace/pages/product_form/index.tsx", "TypeScript JSX", 0, 147, 0, 0, 0, 0, 0, 0, 7, 5, 159
+"/Users/pichsophaneatdy/Documents/marketplace/pages/products/[product_id].tsx", "TypeScript JSX", 0, 196, 0, 0, 0, 0, 0, 0, 2, 9, 207
+"/Users/pichsophaneatdy/Documents/marketplace/pages/products/dashboard.module.scss", "SCSS", 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3
+"/Users/pichsophaneatdy/Documents/marketplace/pages/products/index.tsx", "TypeScript JSX", 0, 93, 0, 0, 0, 0, 0, 0, 4, 7, 104
+"/Users/pichsophaneatdy/Documents/marketplace/pages/register-page/index.tsx", "TypeScript JSX", 0, 202, 0, 0, 0, 0, 0, 0, 12, 14, 228
+"/Users/pichsophaneatdy/Documents/marketplace/pages/register-page/register-page.module.scss", "SCSS", 0, 0, 10, 0, 0, 0, 0, 0, 0, 1, 11
+"/Users/pichsophaneatdy/Documents/marketplace/pages/saving/index.tsx", "TypeScript JSX", 0, 7, 0, 0, 0, 0, 0, 0, 0, 2, 9
+"/Users/pichsophaneatdy/Documents/marketplace/public/next.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+"/Users/pichsophaneatdy/Documents/marketplace/public/vercel.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+"/Users/pichsophaneatdy/Documents/marketplace/styles/Home.module.scss", "SCSS", 0, 0, 194, 0, 0, 0, 0, 0, 3, 32, 229
+"/Users/pichsophaneatdy/Documents/marketplace/styles/__mixins.scss", "SCSS", 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 32
+"/Users/pichsophaneatdy/Documents/marketplace/styles/__varaibles.scss", "SCSS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"/Users/pichsophaneatdy/Documents/marketplace/styles/globals.scss", "SCSS", 0, 0, 14, 0, 0, 0, 0, 0, 0, 5, 19
+"/Users/pichsophaneatdy/Documents/marketplace/tsconfig.json", "JSON with Comments", 0, 0, 0, 18, 0, 0, 0, 0, 5, 0, 23
+"Total", "-", 531, 2175, 320, 18, 23, 5807, 2, 4, 73, 236, 9189

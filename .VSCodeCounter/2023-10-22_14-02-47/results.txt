@@ -1,0 +1,106 @@
+Date : 2023-10-22 14:02:47
+Directory : /Users/pichsophaneatdy/Documents/marketplace
+Total : 45 files,  8880 codes, 73 comments, 236 blanks, all 9189 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          2 |      5,807 |          0 |          2 |      5,809 |
+| TypeScript JSX     |         22 |      2,175 |         60 |        136 |      2,371 |
+| TypeScript         |          8 |        531 |          3 |         38 |        572 |
+| SCSS               |          8 |        320 |          4 |         42 |        366 |
+| Markdown           |          1 |         23 |          0 |         16 |         39 |
+| JSON with Comments |          1 |         18 |          5 |          0 |         23 |
+| JavaScript         |          1 |          4 |          1 |          2 |          7 |
+| XML                |          2 |          2 |          0 |          0 |          2 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                         | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                            |         45 |      8,880 |         73 |        236 |      9,189 |
+| . (Files)                                                                                    |          5 |      5,852 |          6 |         20 |      5,878 |
+| component                                                                                    |         12 |      1,056 |         18 |         68 |      1,142 |
+| component (Files)                                                                            |          1 |         26 |          0 |          1 |         27 |
+| component/Checkout                                                                           |          1 |        116 |          2 |          2 |        120 |
+| component/Filter                                                                             |          1 |        129 |          2 |          6 |        137 |
+| component/HydrationZustard                                                                   |          1 |         12 |          1 |          4 |         17 |
+| component/LoggedInHeader                                                                     |          1 |        243 |          1 |         16 |        260 |
+| component/LoggedOutHeader                                                                    |          1 |        248 |          0 |         14 |        262 |
+| component/ProductCard                                                                        |          1 |         38 |          0 |          8 |         46 |
+| component/ProductList                                                                        |          1 |         27 |          1 |          3 |         31 |
+| component/SingleCart                                                                         |          1 |         60 |          7 |          6 |         73 |
+| component/Slider                                                                             |          1 |         46 |          0 |          2 |         48 |
+| component/Upload                                                                             |          2 |        111 |          4 |          6 |        121 |
+| configuration                                                                                |          1 |         93 |          0 |         11 |        104 |
+| context                                                                                      |          1 |         34 |          2 |          3 |         39 |
+| data                                                                                         |          2 |        256 |          0 |          6 |        262 |
+| functions                                                                                    |          2 |        121 |          0 |         15 |        136 |
+| interface                                                                                    |          1 |         17 |          0 |          0 |         17 |
+| pages                                                                                        |         15 |      1,209 |         44 |         75 |      1,328 |
+| pages (Files)                                                                                |          3 |        129 |          1 |         11 |        141 |
+| pages/api                                                                                    |          1 |         10 |          1 |          3 |         14 |
+| pages/cart                                                                                   |          1 |        217 |         15 |          8 |        240 |
+| pages/listing                                                                                |          1 |         89 |          2 |          5 |         96 |
+| pages/login-page                                                                             |          2 |        106 |          0 |         10 |        116 |
+| pages/product_form                                                                           |          1 |        147 |          7 |          5 |        159 |
+| pages/products                                                                               |          3 |        292 |          6 |         16 |        314 |
+| pages/register-page                                                                          |          2 |        212 |         12 |         15 |        239 |
+| pages/saving                                                                                 |          1 |          7 |          0 |          2 |          9 |
+| public                                                                                       |          2 |          2 |          0 |          0 |          2 |
+| styles                                                                                       |          4 |        240 |          3 |         38 |        281 |
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                     | language           | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| /Users/pichsophaneatdy/Documents/marketplace/README.md                                       | Markdown           |         23 |          0 |         16 |         39 |
+| /Users/pichsophaneatdy/Documents/marketplace/component/Checkout/Checkout.tsx                 | TypeScript JSX     |        116 |          2 |          2 |        120 |
+| /Users/pichsophaneatdy/Documents/marketplace/component/Confirmation.tsx                      | TypeScript JSX     |         26 |          0 |          1 |         27 |
+| /Users/pichsophaneatdy/Documents/marketplace/component/Filter/Filter.tsx                     | TypeScript JSX     |        129 |          2 |          6 |        137 |
+| /Users/pichsophaneatdy/Documents/marketplace/component/HydrationZustard/HydrationZustard.tsx | TypeScript JSX     |         12 |          1 |          4 |         17 |
+| /Users/pichsophaneatdy/Documents/marketplace/component/LoggedInHeader/LoggedInHeader.tsx     | TypeScript JSX     |        243 |          1 |         16 |        260 |
+| /Users/pichsophaneatdy/Documents/marketplace/component/LoggedOutHeader/LoggedOutHeader.tsx   | TypeScript JSX     |        248 |          0 |         14 |        262 |
+| /Users/pichsophaneatdy/Documents/marketplace/component/ProductCard/ProductCard.tsx           | TypeScript JSX     |         38 |          0 |          8 |         46 |
+| /Users/pichsophaneatdy/Documents/marketplace/component/ProductList/ProductList.tsx           | TypeScript JSX     |         27 |          1 |          3 |         31 |
+| /Users/pichsophaneatdy/Documents/marketplace/component/SingleCart/SingleCart.tsx             | TypeScript JSX     |         60 |          7 |          6 |         73 |
+| /Users/pichsophaneatdy/Documents/marketplace/component/Slider/Slider.tsx                     | TypeScript JSX     |         46 |          0 |          2 |         48 |
+| /Users/pichsophaneatdy/Documents/marketplace/component/Upload/Upload.module.scss             | SCSS               |         57 |          1 |          2 |         60 |
+| /Users/pichsophaneatdy/Documents/marketplace/component/Upload/Upload.tsx                     | TypeScript JSX     |         54 |          3 |          4 |         61 |
+| /Users/pichsophaneatdy/Documents/marketplace/configuration/awsCognito.ts                     | TypeScript         |         93 |          0 |         11 |        104 |
+| /Users/pichsophaneatdy/Documents/marketplace/context/CartContext.ts                          | TypeScript         |         34 |          2 |          3 |         39 |
+| /Users/pichsophaneatdy/Documents/marketplace/data/countryData.ts                             | TypeScript         |        196 |          0 |          2 |        198 |
+| /Users/pichsophaneatdy/Documents/marketplace/data/productData.ts                             | TypeScript         |         60 |          0 |          4 |         64 |
+| /Users/pichsophaneatdy/Documents/marketplace/functions/awsCognito.ts                         | TypeScript         |        103 |          0 |         12 |        115 |
+| /Users/pichsophaneatdy/Documents/marketplace/functions/cloudinary.ts                         | TypeScript         |         18 |          0 |          3 |         21 |
+| /Users/pichsophaneatdy/Documents/marketplace/interface/product.ts                            | TypeScript         |         17 |          0 |          0 |         17 |
+| /Users/pichsophaneatdy/Documents/marketplace/next.config.js                                  | JavaScript         |          4 |          1 |          2 |          7 |
+| /Users/pichsophaneatdy/Documents/marketplace/package-lock.json                               | JSON               |      5,766 |          0 |          1 |      5,767 |
+| /Users/pichsophaneatdy/Documents/marketplace/package.json                                    | JSON               |         41 |          0 |          1 |         42 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/_app.tsx                                  | TypeScript JSX     |         36 |          1 |          6 |         43 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/_document.tsx                             | TypeScript JSX     |         12 |          0 |          2 |         14 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/api/hello.ts                              | TypeScript         |         10 |          1 |          3 |         14 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/cart/index.tsx                            | TypeScript JSX     |        217 |         15 |          8 |        240 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/index.tsx                                 | TypeScript JSX     |         81 |          0 |          3 |         84 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/listing/index.tsx                         | TypeScript JSX     |         89 |          2 |          5 |         96 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/login-page/index.tsx                      | TypeScript JSX     |         96 |          0 |          9 |        105 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/login-page/login-page.module.scss         | SCSS               |         10 |          0 |          1 |         11 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/product_form/index.tsx                    | TypeScript JSX     |        147 |          7 |          5 |        159 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/products/[product_id].tsx                 | TypeScript JSX     |        196 |          2 |          9 |        207 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/products/dashboard.module.scss            | SCSS               |          3 |          0 |          0 |          3 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/products/index.tsx                        | TypeScript JSX     |         93 |          4 |          7 |        104 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/register-page/index.tsx                   | TypeScript JSX     |        202 |         12 |         14 |        228 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/register-page/register-page.module.scss   | SCSS               |         10 |          0 |          1 |         11 |
+| /Users/pichsophaneatdy/Documents/marketplace/pages/saving/index.tsx                          | TypeScript JSX     |          7 |          0 |          2 |          9 |
+| /Users/pichsophaneatdy/Documents/marketplace/public/next.svg                                 | XML                |          1 |          0 |          0 |          1 |
+| /Users/pichsophaneatdy/Documents/marketplace/public/vercel.svg                               | XML                |          1 |          0 |          0 |          1 |
+| /Users/pichsophaneatdy/Documents/marketplace/styles/Home.module.scss                         | SCSS               |        194 |          3 |         32 |        229 |
+| /Users/pichsophaneatdy/Documents/marketplace/styles/__mixins.scss                            | SCSS               |         32 |          0 |          0 |         32 |
+| /Users/pichsophaneatdy/Documents/marketplace/styles/__varaibles.scss                         | SCSS               |          0 |          0 |          1 |          1 |
+| /Users/pichsophaneatdy/Documents/marketplace/styles/globals.scss                             | SCSS               |         14 |          0 |          5 |         19 |
+| /Users/pichsophaneatdy/Documents/marketplace/tsconfig.json                                   | JSON with Comments |         18 |          5 |          0 |         23 |
+| Total                                                                                        |                    |      8,880 |         73 |        236 |      9,189 |
++----------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
