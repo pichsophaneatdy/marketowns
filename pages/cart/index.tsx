@@ -5,13 +5,14 @@ import { Flex, Text, Button, Spinner, AlertTitle, AlertDescription, Alert, Alert
 import { Product, CartProduct } from '@/interface/product';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
+import { FcHighPriority } from "react-icons/fc";
 // Component
 import Checkout from '@/component/Checkout/Checkout';
 // Cognito
 import { getCurrentUser } from '@/functions/awsCognito';
+import { clear } from 'console';
 
-const CartPage = () => {
-
+const CartPage = () => {  
   // Checkout State
   const [name, setName] = useState<string>("")
   const [address, setAddress] = useState<string>("")
@@ -21,7 +22,7 @@ const CartPage = () => {
   const [country, setCountry] = useState<string>("")
   const [Subtotal, setSubtotal] = useState<number>(0)
   const [payment, setPayment] = useState<string>("")
-
+  const [orderConfirmation, setOrderConfirmation] = useState<string>("")
   // Checkout status
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [success, setSuccess] = useState<boolean>(false)
@@ -72,8 +73,10 @@ const CartPage = () => {
       setIsLoading(true)
       const currentUser = await getCurrentUser();
       const productsArray = cart.map((product) => product.product_id);
+      const order_number = uuidv4();
+      setOrderConfirmation(order_number);
       const newOrder= {
-        order_id: uuidv4(),
+        order_id: order_number,
         user_id: currentUser.username,
         date: new Date().getTime(),
         subtotal: Subtotal,
@@ -87,15 +90,26 @@ const CartPage = () => {
         payment: "Pay at delivery",
         products: productsArray
       }
+      // Add order to dynamodb
       await axios.post(process.env.NEXT_PUBLIC_API_2!, newOrder, {
         headers: {
           Authorization: currentUser.idToken
       }
       })
+      // Remove products from listing and add products to archive product
+      await axios.post(process.env.NEXT_PUBLIC_API_3!, {
+        products: cart,
+        productIds: productsArray,
+      }, {
+        headers: {
+          Authorization: currentUser.idToken
+      }});
+      clearCart()
+      setSuccess(true);
     } catch(err){
       setError(true)
     } finally {
-      setIsLoading(true)
+      setIsLoading(false)
     }
     
   }
@@ -148,7 +162,7 @@ const CartPage = () => {
   if(success) {
     return (
       <Alert
-        maxW={"500px"}
+        maxW={"700px"}
         w="90%"
         borderRadius={6}
         mx={"auto"}
@@ -159,57 +173,68 @@ const CartPage = () => {
         alignItems='center'
         justifyContent='center'
         textAlign='center'
-        height='200px'
+        maxHeight='350px'
+        p={6}
+
       >
         <AlertIcon boxSize='40px' mr={0} />
         <AlertTitle mt={4} mb={1} fontSize='md'>
-          Submitted your order
+          Your order confirmation is {orderConfirmation}.
         </AlertTitle>
         <AlertDescription maxWidth='sm'>
-          Thanks for using Marketowns Platform.
+          We have successfully processed your order. Thanks for using Marketowns.
         </AlertDescription>
         <Text fontSize={"sm"} mt={4} fontWeight={600} color={"blue.500"} as="a" href="/" >Go back home</Text>
       </Alert>
     )
   }
-  return (
-    <Flex alignItems={"start"} bg={"gray.50"} gap={{md: "2rem"}} flexDirection={{base: 'column', lg: "row"}} py={{base: 6, md:8}} px={{base: 4, md: "5%"}} >
-        {/* Cart Products, Subtotal, and Total */}
-        <Flex flexDirection={"column"} width={{base: "100%",xl: "60%"}}>
-          <Flex p={4} bg={"white"} flexDirection={'column'} flexGrow={1} gap={6}>
-            {groupCart.length > 0 ? groupCart.map((product) => <SingleCart product={product} key={product.product_id} />) : <Text>No item in your cart right now.</Text>}
+  if(cart.length < 1) {
+    return (
+      <Flex minH="100vh" bg={"gray.50"} alignItems={"center"} pt={8} flexDirection={"column"}>
+        <FcHighPriority size={40}/>
+        <Text mt={4} color={"red.500"} fontWeight={500}>No product in your cart right now.</Text>
+      </Flex>
+    )
+  } else {
+    return (
+      <Flex minH="100vh" alignItems={"start"} bg={"gray.50"} gap={{md: "2rem"}} flexDirection={{base: 'column', lg: "row"}} py={{base: 6, md:8}} px={{base: 4, md: "5%"}} >
+          {/* Cart Products, Subtotal, and Total */}
+          <Flex flexDirection={"column"} width={{base: "100%",xl: "60%"}}>
+            <Flex p={4} bg={"white"} flexDirection={'column'} flexGrow={1} gap={6}>
+              {groupCart.map((product) => <SingleCart product={product} key={product.product_id} />)}
+            </Flex>
+            <Flex gap={2} textAlign={"right"} flexDirection="column" mt={{base: 6, md: 8,lg: 10}}>
+              <Text fontWeight={500}>Sub total: ${Subtotal} </Text>
+              <Text color="gray.600">GST(5%): ${(Subtotal*0.05).toFixed(2)}</Text>
+              <Text fontWeight={600} fontSize={"2xl"}>Total: ${(Subtotal*1.05).toFixed(2)} </Text>
+            </Flex>
+            <Flex justifyContent={"end"} gap={4}>
+              <Button w="200px" mt={4} onClick={()=>clearCart()} >Clear cart</Button>
+            </Flex>
           </Flex>
-          <Flex gap={2} textAlign={"right"} flexDirection="column" mt={{base: 6, md: 8,lg: 10}}>
-            <Text fontWeight={500}>Sub total: ${Subtotal} </Text>
-            <Text color="gray.600">GST(5%): ${(Subtotal*0.05).toFixed(2)}</Text>
-            <Text fontWeight={600} fontSize={"2xl"}>Total: ${(Subtotal*1.05).toFixed(2)} </Text>
-          </Flex>
-          <Flex justifyContent={"end"} gap={4}>
-            <Button w="200px" mt={4} onClick={()=>clearCart()} >Clear cart</Button>
-          </Flex>
-        </Flex>
-        {/* Checkout section */}
-        <Checkout
-          name={name}
-          setName={setName}
-          address={address}
-          setAddress={setAddress}
-          apt={apt}
-          setApt={setApt}
-          city={city}
-          setCity={setCity}
-          country={country}
-          setCountry={setCountry}
-          payment={payment}
-          setPayment={setPayment}
-          zipCode={zipCode}
-          setZipCode={setZipCode}
-          handleCheckout={handleCheckout}
-          error={formError}
-        />
-    </Flex>
-    
-  )
+          {/* Checkout section */}
+            <Checkout
+              name={name}
+              setName={setName}
+              address={address}
+              setAddress={setAddress}
+              apt={apt}
+              setApt={setApt}
+              city={city}
+              setCity={setCity}
+              country={country}
+              setCountry={setCountry}
+              payment={payment}
+              setPayment={setPayment}
+              zipCode={zipCode}
+              setZipCode={setZipCode}
+              handleCheckout={handleCheckout}
+              error={formError}
+            />
+      </Flex>
+    )
+  }
+  
 }
 
 export default CartPage
