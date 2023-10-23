@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import { Product } from '@/interface/product';
 import { getCurrentUser } from '@/configuration/awsCognito';
-import { CircularProgress, Flex, Text,  Table, Thead, Tbody,Tfoot,Tr,Th,Td, TableContainer, } from '@chakra-ui/react';
+import { Button, CircularProgress, Flex, Text,  Table, Thead, Tbody,Tfoot,Tr,Th,Td, TableContainer, } from '@chakra-ui/react';
 
 const getProduct = async() => {
     const user = await getCurrentUser();
@@ -44,7 +44,7 @@ const listing = (props: any) => {
     return (
         <Flex>
             {
-                products.length === 0 ? (
+                products?.length === 0 ? (
                     <Flex>
                         <Text>You have no listing on Marketowns.</Text>
                     </Flex>
@@ -56,22 +56,31 @@ const listing = (props: any) => {
                             <Thead>
                                 <Tr>
                                     <Th>Product Name</Th>
-                                    <Th>Listing Date</Th>
+                                    <Th>Listing Date (YYYY-MM-DD)</Th>
                                     <Th isNumeric>Price</Th>
                                     <Th>Sold</Th>
+                                    <Th>Action</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
                                 {
-                                    products.map((product) => {
+                                    products?.map((product) => {
                                         let date = new Date(Number(product.date))
                                         return (
                                             <Tr>
                                                 <Td>{product.name}</Td>
-                                                <Td>{date.getMonth()}-{date.getFullYear()}-{date.getDate()}</Td>
+                                                <Td>{date.getFullYear()}-{date.getMonth() >= 10 ? date.getMonth() : `0${date.getMonth()}`}-{date.getDate() >= 10 ? date.getDate() : `0${date.getDate()}`}</Td>
                                                 <Td isNumeric>{product.price}</Td>
-                                                <Td>No</Td>
-                                        </Tr>
+                                                <Td fontWeight={600} color={product.sold ? "green.500" : "red.500"}>{product.sold ? "Yes" : "NO"}</Td>
+                                                {
+                                                    !product.sold ? (
+                                                        <Th>
+                                                            <Button colorScheme='red' variant="outline" size="sm">Remove</Button>
+                                                        </Th>) :( <Th></Th>
+                                                    ) 
+                                                }
+                                                
+                                            </Tr>
                                         )
                                     })
                                 }
@@ -81,7 +90,8 @@ const listing = (props: any) => {
                                     <Th>Total</Th>
                                     <Th></Th>
                                     <Th></Th>
-                                    <Th>{products.length}</Th>
+                                    <Th>{products?.length}</Th>
+                                    <Th></Th>
                                 </Tr>
                             </Tfoot>
                         </Table>

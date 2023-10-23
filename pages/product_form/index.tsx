@@ -36,7 +36,6 @@ const ProductForm = () => {
             setIsLoading(true)
             const urls = await handleUpload(selectedImages);
             const currentUser = await getCurrentUser();
-            console.log(currentUser.idToken)
             const newProduct = {
                 product_id: uuidv4(),
                 seller_id: currentUser.username,

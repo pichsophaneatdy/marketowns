@@ -11,6 +11,7 @@ export interface Product {
     product_id: string, 
     seller_id: string, 
     size: string,
+    sold?: boolean
 }
 export interface CartProduct extends Product {
     quantity?: number

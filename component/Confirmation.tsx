@@ -20,7 +20,7 @@ const Confirmation = () => {
             <AlertDescription maxWidth='sm'>
                 Thanks for uploading your product. It will be posted on marketowns soon.
             </AlertDescription>
-            <Button mt="4" bg="transparent" color="blue.500" as="a" href="/dashboard">Go back to homepage</Button>
+            <Button mt="4" bg="transparent" color="blue.500" as="a" href="/products">Go back to homepage</Button>
         </Alert>
     )
 }

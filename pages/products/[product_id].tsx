@@ -35,7 +35,7 @@ const Product_Page = (props: any) => {
     const toast = useToast()
 
     const handleNextImg = () => {
-        if(image < 2) {
+        if(image < product.images.length-1) {
             setImage(image+1)
         }
     }
