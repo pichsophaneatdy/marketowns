@@ -9,7 +9,7 @@ export interface Product {
     name: string, 
     price: string, 
     product_id: string, 
-    seller_id: string, 
+    seller_id?: string, 
     size: string,
     sold?: boolean
 }

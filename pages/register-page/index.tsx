@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import styles from "./register-page.module.scss";
 import { useRouter } from "next/router";
-import axios from "axios";
 // AWS functions
 import { getCurrentUser, registerUser, verifyUser } from "@/configuration/awsCognito";
 
@@ -56,8 +55,8 @@ const RegisterPage = () => {
             const data: any = await registerUser(username, email, pwd);
             setUsernameAWS(data);
             setIsLoading(false);
-        } catch(error) {
-            setFormError("Unable to create your account at the momment");
+        } catch(error: any) {
+            setFormError(`${error.message}.` || "Unable to register new user at the moment.");
             setIsLoading(false);
         }
         
