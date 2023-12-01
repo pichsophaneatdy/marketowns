@@ -232,7 +232,7 @@ const CartPage = () => {
         <AlertDescription maxWidth='sm'>
           We have successfully processed your order. Thanks for using Marketowns.
         </AlertDescription>
-        <Text fontSize={"sm"} mt={4} fontWeight={600} color={"blue.500"} as="a" href="/" >Go back home</Text>
+        <Text fontSize={"sm"} mt={4} fontWeight={600} color={"blue.500"} as="a" href="/products" >Go back home</Text>
       </Alert>
     )
   }
