@@ -9,7 +9,7 @@ interface ProductListProp {
 }
 const ProductList: React.FC<ProductListProp> = ({data}) => {
     return (
-            <Flex py={{base: 10}} px={{base: 0, md: 4, lg: 8}} flexWrap={"wrap"} gap={{base: 4, md: 6, lg: 8}} flexDirection={{base: "column", md: "row"}} justifyContent={{md: "space-between"}}>
+            <Flex py={{base: 10}} px={{base: 0, md: 4, lg: 8}} flexWrap={"wrap"} gap={{base: 4, md: 6, lg: 8}} flexDirection={{base: "column", md: "row"}} justifyContent={{md: "start"}}>
             {
                 data?.map((product) => {
                     return (

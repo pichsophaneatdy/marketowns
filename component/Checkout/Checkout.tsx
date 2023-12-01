@@ -18,9 +18,15 @@ interface CheckoutProps {
     payment: string,
     setPayment: (value: string) => void,
     handleCheckout: (e: React.FormEvent) => void,
-    error: string
+    error: string,
+    isValidName: boolean,
+    isValidAddress: boolean,
+    isValidApt: boolean,
+    isValidCity: boolean,
+    isValidZipCode: boolean,
+    isValidCountry: boolean
 }
-function Checkout({name, setName, address, setAddress, apt, setApt, city, zipCode, setZipCode, setCity, country, setCountry, payment, setPayment, handleCheckout, error}: CheckoutProps) {
+function Checkout({name, setName, address, setAddress, apt, setApt, city, zipCode, setZipCode, setCity, country, setCountry, payment, setPayment, handleCheckout, error, isValidName, isValidAddress, isValidApt, isValidCity, isValidZipCode, isValidCountry}: CheckoutProps) {
     return (
         <Flex minH={"100vh"} gap={4} flexGrow={1} borderRadius={8} mt={{base: 10,md: 0}} flexDirection={'column'} w={{base: "100%",xl: "40%"}}>
             {/* Shipping Info */}
@@ -30,7 +36,7 @@ function Checkout({name, setName, address, setAddress, apt, setApt, city, zipCod
                     error && (
                         <Alert variant='left-accent' fontSize={"sm"} my={2} borderRadius={4} status='error'>
                             <AlertIcon />
-                            Missing required information
+                            {error}
                         </Alert>
                 )
                 }
@@ -44,6 +50,7 @@ function Checkout({name, setName, address, setAddress, apt, setApt, city, zipCod
                             type='text' 
                             size="sm" 
                             bgColor={"white"}
+                            isInvalid={!isValidName}
                         />  
                     </FormControl>
                     <Flex gap={4}>
@@ -56,6 +63,7 @@ function Checkout({name, setName, address, setAddress, apt, setApt, city, zipCod
                                 type='text' 
                                 size="sm" 
                                 bgColor={"white"}
+                                isInvalid={!isValidAddress}
                         />
                         </FormControl>
                         <FormControl w="30%" isRequired>
@@ -64,9 +72,10 @@ function Checkout({name, setName, address, setAddress, apt, setApt, city, zipCod
                                 value={apt}
                                 onChange={(e) => setApt(e.target.value)} 
                                 borderRadius={4}
-                                type='text' 
+                                type='number' 
                                 size="sm" 
                                 bgColor={"white"}
+                                isInvalid={!isValidApt}
                         />
                         </FormControl>
                     </Flex>
@@ -80,6 +89,7 @@ function Checkout({name, setName, address, setAddress, apt, setApt, city, zipCod
                                 type='text' 
                                 size="sm" 
                                 bgColor={"white"}
+                                isInvalid={!isValidCity}
                         />
                         </FormControl>
                         <FormControl isRequired>
@@ -91,11 +101,12 @@ function Checkout({name, setName, address, setAddress, apt, setApt, city, zipCod
                                 type='text' 
                                 size="sm" 
                                 bgColor={"white"}
+                                isInvalid={!isValidZipCode}
                         />
                         </FormControl>
                         <FormControl isRequired>
                             <FormLabel fontSize="xs">COUNTRY</FormLabel>
-                            <Select borderRadius={4} size="sm" value={country} onChange={(e)=>setCountry(e.target.value)} placeholder="Select country">
+                            <Select isInvalid={!isValidCountry} borderRadius={4} size="sm" value={country} onChange={(e)=>setCountry(e.target.value)} placeholder="Select country">
                                 {
                                     countries.map((country: string) => {
                                         return <option value={country}>{country}</option>

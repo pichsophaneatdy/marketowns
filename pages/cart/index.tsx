@@ -10,7 +10,6 @@ import { FcHighPriority } from "react-icons/fc";
 import Checkout from '@/component/Checkout/Checkout';
 // Cognito
 import { getCurrentUser } from '@/functions/awsCognito';
-import { clear } from 'console';
 
 const CartPage = () => {  
   // Checkout State
@@ -23,6 +22,13 @@ const CartPage = () => {
   const [Subtotal, setSubtotal] = useState<number>(0)
   const [payment, setPayment] = useState<string>("")
   const [orderConfirmation, setOrderConfirmation] = useState<string>("")
+  // Error States
+  const [isValidName, setIsValidName] = useState<boolean>(true);
+  const [isValidAddress, setIsValidAddress] = useState<boolean>(true);
+  const [isValidApt, setIsValidApt] = useState<boolean>(true);
+  const [isValidCity, setIsValidCity] = useState<boolean>(true);
+  const [isValidZipCode, setIsValidZipCode] = useState<boolean>(true);
+  const [isValidCountry, setIsValidCountry] = useState<boolean>(true);
   // Checkout status
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [success, setSuccess] = useState<boolean>(false)
@@ -59,16 +65,58 @@ const CartPage = () => {
   useEffect(() => {
     setFormError("")
   }, [name, address, apt, city, zipCode, country])
-
+  useEffect(() => {
+    setIsValidAddress(true)
+  }, [address])
+  useEffect(() => {
+    setIsValidApt(true)
+  }, [apt])
+  useEffect(() => {
+    setIsValidCity(true)
+  }, [city])
+  useEffect(() => {
+    setIsValidZipCode(true)
+  }, [zipCode])
+  useEffect(() => {
+    setIsValidCountry(true)
+  }, [country])
   // Handle Submit
   const handleCheckout = async(e: React.FormEvent) => {
     e.preventDefault();
     // Checking for missing required fields
     if(!name || !address || !apt || !city || !zipCode || !country) {
+      if(!name){
+        setIsValidName(false);
+      }
+      if(!address){
+        setIsValidAddress(false);
+      }
+      if(!apt){
+        setIsValidApt(false);
+      }
+      if(!city){
+        setIsValidCity(false);
+      }
+      if(!zipCode){
+        setIsValidZipCode(false);
+      }
+      if(!country){
+        setIsValidCountry(false);
+      }
       setFormError("Missing required field(s)!");
       return;
     }
-
+    // Form Validation
+    if(!validatePostalCode(zipCode)) {
+      setFormError("Invalid postal code!");
+      setIsValidZipCode(false)
+      return;
+    }
+    if(!isValidCityName(city)) {
+      setFormError("Invalid city name!");
+      setIsValidCity(false)
+      return;
+    }
     try {
       setIsLoading(true)
       const currentUser = await getCurrentUser();
@@ -230,11 +278,33 @@ const CartPage = () => {
               setZipCode={setZipCode}
               handleCheckout={handleCheckout}
               error={formError}
+              isValidName = {isValidName}
+              isValidAddress = {isValidAddress}
+              isValidApt= {isValidApt}
+              isValidCity = {isValidCity}
+              isValidZipCode = {isValidZipCode}
+              isValidCountry = {isValidCountry}
             />
       </Flex>
     )
   }
   
+}
+// Zip code validation
+function validatePostalCode(postalCode: string): boolean {
+  // Canadian postal code regex pattern
+  const pattern: RegExp = /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/;
+
+  // Check if the postal code matches the pattern
+  return pattern.test(postalCode);
+}
+// City Validation
+function isValidCityName(cityName: string): boolean {
+  // Regular expression pattern to check if the city name contains only letters
+  const pattern: RegExp = /^[A-Za-z\s]+$/;
+
+  // Check if the city name matches the pattern
+  return pattern.test(cityName);
 }
 
 export default CartPage

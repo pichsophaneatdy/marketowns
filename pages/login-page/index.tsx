@@ -8,7 +8,9 @@ import {
     InputRightElement,
     Stack,
     Button,
-    Text
+    Text,
+    Alert,
+    AlertIcon
 } from "@chakra-ui/react";
 import { loginUser } from '@/configuration/awsCognito';
 import { useRouter } from 'next/router';
@@ -22,16 +24,25 @@ const LoginPage = () => {
     const [pwd, setPwd] = useState<string>("");
     const [show, setShow] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [error, setError] = useState<any>("");
 
     const handleClick = () => setShow(!show);
 
     const handleSubmit = async(e: React.FormEvent) => {
         e.preventDefault();
+        setIsLoading(true);
+        if(!username ||!pwd) {
+            setError("Please enter your username and password");
+            return;
+        }
         try {
             const data = await loginUser(username, pwd);
             router.push("/products");
-        } catch(error) {
+        } catch(error: any) {
+            setError(error.message || "Something went wrong");
             console.log(error)
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -44,11 +55,23 @@ const LoginPage = () => {
 
             })
     }, [])
+    useEffect(() => {
+        setError("");
+    }, [username, pwd])
 
     return (
         <section className={styles.login}>
             <h1 className={styles.login__title}>Login to Marketowns</h1>
+            
             <form className={styles.login__form}>
+                {
+                    error && (
+                        <Alert p={2} fontSize={"sm"} mb={4} variant="left-accent" status='error'>
+                            <AlertIcon />
+                            {error}
+                        </Alert>
+                    )
+                }
                 <Stack spacing={4}>
                     <FormControl isRequired>
                         <FormLabel fontSize="sm">Username</FormLabel>
